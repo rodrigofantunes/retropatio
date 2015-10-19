@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="javax.persistence.Column"/>
+<fullyQualifiedTypeName name="br.com.retropatio.utilities.Utilities"/>
+<fullyQualifiedTypeName name="java.util.Date"/>
+<fullyQualifiedTypeName name="br.com.caelum.vraptor.validator.Validator"/>
+<fullyQualifiedTypeName name="br.com.caelum.vraptor.validator.SimpleMessage"/>
+<fullyQualifiedTypeName name="br.com.caelum.vraptor.Path"/>
+</qualifiedTypeNameHistroy>

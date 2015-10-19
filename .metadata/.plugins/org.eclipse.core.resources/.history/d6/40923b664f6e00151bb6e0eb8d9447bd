@@ -1,0 +1,75 @@
+package br.com.retropatio.architecture;
+
+import java.io.Serializable;
+import java.lang.reflect.Field;
+
+import javax.inject.Inject;
+
+import org.apache.taglibs.standard.resources.Resources;
+
+import br.com.retropatio.dao.LogsDao;
+import br.com.retropatio.model.Log;
+import br.com.retropatio.session.UsuarioLogado;
+import br.com.retropatio.utilities.Utilities;
+
+
+@SuppressWarnings("static-access")
+public class Logs extends Utilities implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+	
+	@Inject private LogsDao logsDao;
+	@Inject private UsuarioLogado usuarioLogado;
+	
+	public static final String CADASTRAR_CAMINHAO 	= new Resources().getMessage("label.cadastrar.caminhao");
+	public static final String CADASTRAR_CONTAINER 	= Resources.getMessage("label.cadastrar.container");
+	public static final String CADASTRAR_MOTORISTA 	= Resources.getMessage("label.cadastrar.motorista");
+	public static final String ALTERAR_CAMINHAO 	= Resources.getMessage("label.alterar.caminhao");
+	public static final String ALTERAR_CONTAINER 	= Resources.getMessage("label.alterar.container");
+	public static final String ALTERAR_MOTORISTA 	= Resources.getMessage("label.alterar.motorista");
+	public static final String DELETAR_CAMINHAO 	= Resources.getMessage("label.deletar.caminhao");
+	public static final String DELETAR_CONTAINER 	= Resources.getMessage("label.deletar.container");
+	public static final String DELETAR_MOTORISTA 	= Resources.getMessage("label.deletar.motorista");
+	
+	protected void gravaLogAcao(String tipo, Object classe) {
+		String modulo, id;
+		try {
+			modulo = classe.getClass().getSimpleName();
+			id = getValueField(classe);
+			logsDao.gravarLog(preparaLog(tipo, modulo, id));
+		} catch (SecurityException | NoSuchFieldException | IllegalArgumentException | IllegalAccessException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public Log preparaLog(String tipo, String modulo, String id){
+		Log log = new Log();
+		log.setEmpresa(usuarioLogado.getEmpresa());
+		log.setUsuario(usuarioLogado.getUsuario());
+		log.setDataAcao(Utilities.getDataAtual());
+		log.setTipoAcao(tipo);
+		log.setModulo(modulo);
+		log.setIdModulo(id);
+		return log;
+	}
+	
+	private String getValueField(Object classe) throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException{
+	    Field[] fields = classe.getClass().getDeclaredFields();
+	    for (Field field : fields) {
+	    	field.setAccessible(true);
+	    	String fieldValue = field.getName() == "id" ? field.get(classe).toString() : "";
+	    	if(fieldValue != null){
+	    		return fieldValue.toString();
+	    	}
+		}
+	    return "";
+	}
+	
+	
+	public static void main (String args[]){
+		Resources rb = new Resources().getMessage("label.cadastrar.caminhao")
+		System.out.println(CADASTRAR_CAMINHAO);
+	}
+	
+}
