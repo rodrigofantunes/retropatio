@@ -1,5 +1,7 @@
 package br.com.retropatio.rules;
 
+import java.text.ParseException;
+
 import javax.inject.Inject;
 
 import br.com.caelum.brutauth.auth.handlers.RuleHandler;
@@ -25,7 +27,11 @@ public class LogadoHandler implements RuleHandler{
 	
 	@Override
 	public void handle() {
-		validation.add(new SimpleMessage("erro","Você precisa estar logado para acessar essa área")).onErrorForwardTo(LoginController.class).login(null);
+		try {
+			validation.add(new SimpleMessage("erro","Você precisa estar logado para acessar essa área")).onErrorForwardTo(LoginController.class).login(null);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

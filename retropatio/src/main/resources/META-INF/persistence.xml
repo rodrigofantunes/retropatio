@@ -14,7 +14,6 @@
 		<class>br.com.retropatio.model.Container</class>
 		<class>br.com.retropatio.model.Empresa</class>
 		<class>br.com.retropatio.model.Entrada</class>
-		<class>br.com.retropatio.model.Log</class>
 		<class>br.com.retropatio.model.MarcaCaminhao</class>
 		<class>br.com.retropatio.model.ModeloCaminhao</class>
 		<class>br.com.retropatio.model.ModeloContainer</class>

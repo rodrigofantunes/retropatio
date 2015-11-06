@@ -11,6 +11,7 @@ import br.com.retropatio.model.Caminhao;
 @Controller
 public class CaminhaoController extends CaminhaoBusiness {
 
+	private static final long serialVersionUID = 1L;
 	private final Result result;
 
 	protected CaminhaoController() {

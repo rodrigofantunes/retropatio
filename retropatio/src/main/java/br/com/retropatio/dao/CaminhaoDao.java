@@ -6,7 +6,6 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 
-import br.com.retropatio.architecture.Logs;
 import br.com.retropatio.architecture.Querys;
 import br.com.retropatio.model.Caminhao;
 import br.com.retropatio.session.UsuarioLogado;
@@ -28,7 +27,7 @@ public class CaminhaoDao extends Querys{
 	public void inserirCaminhao(Caminhao caminhao){
 		try {
 			em.persist(caminhao);
-			Logs.gravaLogAcao(Logs.CADASTRAR_CAMINHAO,caminhao);
+			gravaLogAcao(CADASTRAR_CAMINHAO,caminhao);
 		} catch (NoResultException e) {
 			
 		}
@@ -41,7 +40,7 @@ public class CaminhaoDao extends Querys{
 	public void alterarCaminhao(Caminhao caminhao) {
 		try {
 			em.merge(caminhao);
-			Logs.gravaLogAcao(Logs.ALTERAR_CAMINHAO,caminhao);
+			gravaLogAcao(ALTERAR_CAMINHAO,caminhao);
 		} catch (NoResultException e) {
 			
 		}
@@ -50,7 +49,7 @@ public class CaminhaoDao extends Querys{
 	public void deletarCaminhao(Caminhao caminhao) {
 		try {
 			em.remove(em.merge(caminhao));
-			Logs.gravaLogAcao(Logs.DELETAR_CAMINHAO,caminhao);
+			gravaLogAcao(DELETAR_CAMINHAO,caminhao);
 		} catch (NoResultException e) {
 			
 		}

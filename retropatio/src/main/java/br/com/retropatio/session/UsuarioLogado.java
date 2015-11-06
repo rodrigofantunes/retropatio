@@ -2,8 +2,6 @@ package br.com.retropatio.session;
 
 import java.io.Serializable;
 
-import javax.ejb.TransactionAttribute;
-import javax.ejb.TransactionAttributeType;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
@@ -12,7 +10,6 @@ import br.com.retropatio.model.Usuario;
 
 @SessionScoped
 @Named("sessaoLogada")
-@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
 public class UsuarioLogado implements Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -54,4 +51,5 @@ public class UsuarioLogado implements Serializable{
 	public Long getIdEmpresa(){
 		return this.usuarioLogado.getEmpresa().getId();
 	}
+	
 }

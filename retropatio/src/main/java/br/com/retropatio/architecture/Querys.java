@@ -1,6 +1,5 @@
 package br.com.retropatio.architecture;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +11,7 @@ import br.com.retropatio.model.Usuario;
 import br.com.retropatio.utilities.Utilities;
 
 @SuppressWarnings("rawtypes")
-public class Querys extends Utilities implements Serializable{
+public class Querys extends Utilities {
 	
 private static final long serialVersionUID = 1L;
 

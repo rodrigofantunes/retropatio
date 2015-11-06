@@ -6,3 +6,4 @@
 <c:set var="jsDir" value="${path}/js" />
 <c:set var="cssDir" value="${path}/css" />
 <c:set var="imgDir" value="${path}/images" />
+<c:set var="loginDir" value="${path}/login" />

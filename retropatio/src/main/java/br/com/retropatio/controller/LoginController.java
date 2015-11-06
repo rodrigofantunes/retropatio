@@ -18,6 +18,7 @@ import br.com.retropatio.model.Usuario;
 @Controller
 public class LoginController extends LoginBusiness {
 
+	private static final long serialVersionUID = 1L;
 	@Inject private Result result;
 	private Validator validation;
 	
@@ -30,18 +31,26 @@ public class LoginController extends LoginBusiness {
         this.validation = validation;
     }
 	
+	@Path("/")
+	public void login() throws ParseException {
+		result.redirectTo(this).login(null);
+	}
+	
 	@Path("/login")
-	public void login(Usuario usuario) {
+	public void login(Usuario usuario) throws ParseException {
+		if(verificaSessaoLogada()){
+			result.redirectTo(HomeController.class).home();
+		}
 		result.include(usuario);
 	}
 	
 	@Path("/autenticar")
 	public void autenticar(@NotNull @Valid Usuario usuario) throws NoSuchAlgorithmException, ParseException{
-		validation.onErrorForwardTo(this).login(usuario);
+		validation.onErrorRedirectTo(this).login(usuario);
 		if(efetuaAutenticacao(usuario)){
 			result.redirectTo(HomeController.class).home();
 		}else{
-			validation.add(new SimpleMessage("login", "Email ou Senha inválidos.")).onErrorForwardTo(this).login(usuario);
+			validation.add(new SimpleMessage("login", "Email ou Senha inválidos.")).onErrorRedirectTo(this).login(usuario);
 		}
 	}
 }
