@@ -2,23 +2,39 @@
   font-family: 'Material Icons';
   font-style: normal;
   font-weight: 400;
-  src: local('Material Icons'), local('MaterialIcons-Regular'), url(materialicons/v8/2fcrYFNaTjcS6g4U3t-Y5ZjZjT5FdEJ140U2DJYC3mY.woff2) format('woff2');
+  src: url(./fonts/MaterialIcons-Regular.eot); /* For IE6-8 */
+  src: local('Material Icons'),
+       local('MaterialIcons-Regular'),
+       url(./fonts/MaterialIcons-Regular.woff2) format('woff2'),
+       url(./fonts/MaterialIcons-Regular.woff) format('woff'),
+       url(./fonts/MaterialIcons-Regular.ttf) format('truetype');
 }
 
 .material-icons {
   font-family: 'Material Icons';
   font-weight: normal;
   font-style: normal;
-  font-size: 24px;
-  line-height: 1;
-  letter-spacing: normal;
-  text-transform: none;
+  font-size: 24px;  /* Preferred icon size */
   display: inline-block;
-  white-space: nowrap;
+  width: 1em;
+  height: 1em;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
   word-wrap: normal;
+  white-space: nowrap;
   direction: ltr;
-  -webkit-font-feature-settings: 'liga';
+
+  /* Support for all WebKit browsers. */
   -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Support for IE. */
+  font-feature-settings: 'liga';
 }
 
 html, body {
@@ -56,17 +72,6 @@ html, body {
   margin-left: -16px;
   margin-top: -16px;
 }
-
-.demo-nav-menu{
-    background-color: #CFD8DC;
-}
-
-.demo-nav-menu{
-  color: red !important;
-}
-
-
-
 
 
 .demo-layout .demo-header .mdl-textfield {
@@ -162,8 +167,10 @@ html, body {
   -webkit-align-items: center;
       -ms-flex-align: center;
           align-items: center;
-  color: #16a085;
+  color: #fff;
   font-weight: 500;
+      width: 100%;
+    margin-left: -20px;
 }
 .demo-layout .demo-navigation .mdl-navigation__link:hover {
   background-color: #16a085;
@@ -171,7 +178,7 @@ html, body {
 }
 .demo-navigation .mdl-navigation__link .material-icons {
   font-size: 24px;
-  color: #16a085;
+  color: #fff;
   margin-right: 32px;
 }
 
@@ -332,13 +339,51 @@ nav.mdl-navigation .mdl-badge[data-badge]:after {
   }
 
 .mdl-layout__drawer .mdl-navigation .mdl-navigation__link:hover {
-    background-color: #16a085;
-    color: white;
+    color: #16a085;
+    background-color: rgba(255, 255, 255, 0.89);
 }
 .demo-navigation .mdl-navigation__link:hover .material-icons{
-	color: white;
+	color: #16a085;
 }
 .mdl-menu__item	i {margin: 10px 15px 0px 0px;}
 .mdl-menu__item { display: flex;}
 
 .mdl-color--green{background-color:#16a085 !important}
+
+.back-color{
+	background-color: #DAEFE8;
+}
+
+.btnPadrao {
+  margin-top: 18px;
+  height: 32px;
+  background: #16a085!important;
+  border: none;
+  border-radius: 2px;
+  color: #FFF!important;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  text-transform: uppercase;
+  transition: 0.1s ease;
+  cursor: pointer;
+}
+
+.btnPadrao:hover,
+.btnPadrao:focus {
+  opacity: 0.8;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  transition: 0.1s ease;
+}
+
+.btnPadrao:active {
+  opacity: 1;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+  transition: 0.1s ease;
+}
+.right{
+	float:right;
+}
+.mdl-layout__drawer{
+	overflow-x:hidden;
+	overflow-y:auto;
+}

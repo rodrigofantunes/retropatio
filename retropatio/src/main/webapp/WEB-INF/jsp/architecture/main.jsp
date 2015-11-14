@@ -9,20 +9,13 @@
                           <div class="mdl-layout__header-row">
                                        <span class="mdl-layout-title">Menu</span>
                                        <div class="mdl-layout-spacer"></div>
-                                       <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
-                                                    <label class="mdl-button mdl-js-button mdl-button--icon" for="search">
-                                                                 <i class="material-icons">Pesquisar</i>
-                                                    </label>
-                                                    <div class="mdl-textfield__expandable-holder">
-                                                                 <input class="mdl-textfield__input" type="text" id="search" />
-                                                                 <label class="mdl-textfield__label mdl-color--grey-100" for="search">Pesquisa</label>
-                                                    </div>
-                                       </div>
                                        <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="hdrbtn">
                                                     <i class="material-icons">more_vert</i>
                                        </button>
                                        <ul class="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right" for="hdrbtn">
+                                       			<c:if test="${sessaoLogada.perfil.acessoConfiguracao}">
                                                     <li class="mdl-menu__item"><i class="material-icons">perm_data_setting</i>Configurações</li>
+                                                </c:if>    
                                                     <li class="mdl-menu__item"><i class="material-icons">account_box</i>Meus Dados</li>
                                                     <li class="mdl-menu__item sair"><i class="material-icons">exit_to_app</i>Sair do Sistema</li>
                                        </ul>
@@ -31,7 +24,7 @@
     <div class="demo-drawer mdl-layout__drawer mdl-color--green mdl-color-text--white">
 	    <header class="demo-drawer-header">
 	        <div class="demo-avatar-background">
-	            <img src="${imagens}/user.jpg" class="demo-avatar">
+	        	<i class="material-icons demo-avatar" style="font-size: 3.3em;">&#xE7FD;</i>
 	            <div class="demo-nome-botoes-user">
                 	<span class="demo-nome-user">${sessaoLogada.nome}
                 		<a class="demo-botoes-avatar mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon sair" href="javascript:void(0);" >
@@ -45,7 +38,7 @@
 	<%@ include file="/WEB-INF/jsp/architecture/menu.jsp" %>
 	</div>
 
-	<main class="mdl-layout__content">
+	<main class="mdl-layout__content back-color">
 			<decorator:body />
 	</main>
 </div>

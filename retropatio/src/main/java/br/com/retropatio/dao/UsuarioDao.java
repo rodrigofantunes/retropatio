@@ -36,7 +36,7 @@ public class UsuarioDao extends Querys{
 	
 	public Usuario autenticar ( Usuario user ){
 		try {
-			Usuario usuario = montaQry("from Usuario where login = ?")
+			Usuario usuario = montaQry("from " + Usuario.class.getSimpleName() + " where login = ?")
 							   .append("and senha = ?")
 							   .parametro(user.getLogin())
 							   .parametro(user.getSenha())
@@ -50,7 +50,7 @@ public class UsuarioDao extends Querys{
 	
 	public String verificaLogin(String login){
 		try{
-			return ((Usuario) montaQry("from Usuario where login = ?").parametro(login).retornoUnico(em)).getLogin();
+			return ((Usuario) montaQry("from " + Usuario.class.getSimpleName() + " where login = ?").parametro(login).retornoUnico(em)).getLogin();
 		}
 		catch(Exception ex){
 			return "";
@@ -63,23 +63,23 @@ public class UsuarioDao extends Querys{
 		switch(Integer.parseInt(pesquisa.getTipoPesquisa())){
 		
 		case CODIGO_USUARIO:
-			listaUsuarios = montaQry("from Usuario where id_usuario = ?")
+			listaUsuarios = montaQry("from " + Usuario.class.getSimpleName() + " where id_usuario = ?")
 			.parametro(Long.parseLong(pesquisa.getTexto()))
 			.retornoLista(em);
 			break;
 			
 		case NOME_USUARIO:
-			listaUsuarios = montaQry("from Usuario where pessoa_id_pessoa in ( )")
+			listaUsuarios = montaQry("from " + Usuario.class.getSimpleName() + " where pessoa_id_pessoa in ( )")
 			.retornoLista(em);
 			break;
 			
 		case CPF_USUARIO:
-			listaUsuarios = montaQry("from Usuario where pessoa_id_pessoa in ( )")
+			listaUsuarios = montaQry("from " + Usuario.class.getSimpleName() + " where pessoa_id_pessoa in ( )")
 			.retornoLista(em);
 			break;
 			
 		case TODOS_USUARIOS:
-			listaUsuarios = montaQry("from Usuario where pessoa_id_pessoa in ( )")
+			listaUsuarios = montaQry("from " + Usuario.class.getSimpleName() + " where pessoa_id_pessoa in ( )")
 			.retornoLista(em);
 			break;
 		}
@@ -89,7 +89,7 @@ public class UsuarioDao extends Querys{
 	
 	public String verificarNickLogin(String login){
 		try{
-			return ((Usuario) montaQry("from Usuario where login = ?").parametro(login).retornoUnico(em)).getLogin();
+			return ((Usuario) montaQry("from " + Usuario.class.getSimpleName() + " where login = ?").parametro(login).retornoUnico(em)).getLogin();
 		}
 		catch(NoResultException  e){
 			return "";

@@ -57,7 +57,7 @@ public class CaminhaoDao extends Querys{
 	
 	@SuppressWarnings("unchecked")
 	public List<Caminhao> listarUltimosCaminhoes(){
-		return montaQry("from " + Caminhao.class.getName())
+		return montaQry("from " + Caminhao.class.getSimpleName())
 				.append("where empresa = ?")
 				.parametro(usuarioLogado.getIdEmpresa())
 				.maximoResultado(10)

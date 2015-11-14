@@ -2,6 +2,6 @@
 <html>
 <%@ include file="/WEB-INF/jsp/architecture/head.jsp" %>
 <body>
-	Bem vindo à ${variable} ${linkTo[IndexController].index}
+	Bem vindo à 
 </body>
 </html>

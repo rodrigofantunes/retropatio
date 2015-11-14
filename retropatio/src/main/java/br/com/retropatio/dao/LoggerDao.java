@@ -31,7 +31,7 @@ public class LoggerDao extends Querys {
 	
 	@SuppressWarnings("unchecked")
 	public List<Logs> listarLog(){
-		return montaQry("from " + Logs.class.getName()).retornoLista(em);
+		return montaQry("from " + Logs.class.getSimpleName()).retornoLista(em);
 		
 	}
 }

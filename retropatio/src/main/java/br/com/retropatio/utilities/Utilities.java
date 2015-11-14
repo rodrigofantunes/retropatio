@@ -13,9 +13,11 @@ import br.com.retropatio.model.Empresa;
 import br.com.retropatio.model.Usuario;
 import br.com.retropatio.session.UsuarioLogado;
 
-public class Utilities implements Serializable, UtilStatic, Logger{
+public class Utilities implements Serializable, UtilStatic, UtilList, Logger{
 
 	private static final long serialVersionUID = 1L;
+
+	
 	@Inject protected UsuarioLogado usuarioLogado;
 	
 	public static String codificaSenha(String Senha) throws NoSuchAlgorithmException{
@@ -63,4 +65,5 @@ public class Utilities implements Serializable, UtilStatic, Logger{
 			}		
 			return true;
 	}
+	
 }

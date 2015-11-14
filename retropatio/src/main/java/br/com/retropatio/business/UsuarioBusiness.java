@@ -16,6 +16,7 @@ public class UsuarioBusiness extends Utilities{
 
 	private static final long serialVersionUID = 1L;
 	@Inject private UsuarioDao usuarioDao;
+
 	protected boolean efetuarAutenticacao(Usuario usuario) throws NoSuchAlgorithmException, ParseException{
 		boolean retorno = false;
 		Usuario usuarioParaAutenticar = new Usuario();
@@ -47,5 +48,5 @@ public class UsuarioBusiness extends Utilities{
 	protected List<Usuario> pesquisaUsuario(Pesquisa pesquisa) {
 		return usuarioDao.buscaUsuario(pesquisa);
 	}
-
+	
 }

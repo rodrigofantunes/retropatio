@@ -25,6 +25,9 @@ public class Saida {
 	@OneToOne
 	private Quadra quadra;
 	
+	@OneToOne
+	private Empresa empresa;
+	
 	private Date dataSaida;
 
 	public Long getId() {
@@ -73,6 +76,14 @@ public class Saida {
 
 	public void setDataSaida(Date dataSaida) {
 		this.dataSaida = dataSaida;
+	}
+
+	public Empresa getEmpresa() {
+		return empresa;
+	}
+
+	public void setEmpresa(Empresa empresa) {
+		this.empresa = empresa;
 	}
 	
 	

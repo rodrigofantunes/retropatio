@@ -25,7 +25,10 @@ public class Entrada {
 	@OneToOne
 	private Quadra quadra;
 	
-	private Date dataSaida;
+	@OneToOne
+	private Empresa empresa;
+	
+	private Date dataEntrada;
 
 	public Long getId() {
 		return id;
@@ -67,12 +70,20 @@ public class Entrada {
 		this.quadra = quadra;
 	}
 
-	public Date getDataSaida() {
-		return dataSaida;
+	public Empresa getEmpresa() {
+		return empresa;
 	}
 
-	public void setDataSaida(Date dataSaida) {
-		this.dataSaida = dataSaida;
+	public void setEmpresa(Empresa empresa) {
+		this.empresa = empresa;
+	}
+
+	public Date getDataEntrada() {
+		return dataEntrada;
+	}
+
+	public void setDataEntrada(Date dataEntrada) {
+		this.dataEntrada = dataEntrada;
 	}
 	
 	

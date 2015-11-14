@@ -18,6 +18,7 @@ public class Perfil {
 	private boolean acessoConfiguracao;
 	private boolean acessoEntrada;
 	private boolean acessoSaida;
+	private boolean acessoRelatorio;
 
 	@NotNull @Size(max=60) @Column(nullable = false) private String nome;
 	
@@ -62,6 +63,12 @@ public class Perfil {
 	}
 	public void setAcessoSaida(boolean acessoSaida) {
 		this.acessoSaida = acessoSaida;
+	}
+	public boolean isAcessoRelatorio() {
+		return acessoRelatorio;
+	}
+	public void setAcessoRelatorio(boolean acessoRelatorio) {
+		this.acessoRelatorio = acessoRelatorio;
 	}
 
 }
