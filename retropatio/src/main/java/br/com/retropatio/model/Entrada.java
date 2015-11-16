@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+import br.com.retropatio.utilities.Utilities;
+
 @Entity
 public class Entrada {
 
@@ -78,13 +80,12 @@ public class Entrada {
 		this.empresa = empresa;
 	}
 
-	public Date getDataEntrada() {
-		return dataEntrada;
+	public String getDataEntrada() {
+		return Utilities.converteDataToString(dataEntrada);
 	}
 
 	public void setDataEntrada(Date dataEntrada) {
 		this.dataEntrada = dataEntrada;
 	}
-	
 	
 }

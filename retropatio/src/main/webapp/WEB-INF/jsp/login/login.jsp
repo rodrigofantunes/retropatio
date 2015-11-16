@@ -2,8 +2,8 @@
 
 <!DOCTYPE html>
 <html lang="en">
-	<%@ include file="/WEB-INF/jsp/architecture/head.jsp" %>
-	<link href="${cssDir}/login.css" rel="stylesheet">
+	<%@ include file="/WEB-INF/jsp/architecture/headLogin.jsp" %>
+	<title>Retropátio | Login</title>
 <body>
 <div class="sombra"></div>
 	<form action="<c:url value="/autenticar"/>" method="post" id="login-box">

@@ -13,6 +13,14 @@ public class MarcaCaminhao {
 	@Id @GeneratedValue
 	private Long id;
 
-	@NotNull @Size(max=60) @Column(nullable = false) private String nome;
+	@NotNull @Size(max=60) @Column(nullable = false) private String nomeMarca;
+
+	public String getNomeMarca() {
+		return nomeMarca;
+	}
+
+	public void setNomeMarca(String nomeMarca) {
+		this.nomeMarca = nomeMarca;
+	}
 	
 }

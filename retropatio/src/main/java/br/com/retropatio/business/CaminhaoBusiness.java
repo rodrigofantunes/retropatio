@@ -1,15 +1,16 @@
 package br.com.retropatio.business;
 
+import java.text.ParseException;
 import java.util.List;
 
 import javax.inject.Inject;
 
+import br.com.retropatio.architecture.ValidationSession;
 import br.com.retropatio.dao.CaminhaoDao;
 import br.com.retropatio.model.Caminhao;
-import br.com.retropatio.utilities.Utilities;
 
 
-public class CaminhaoBusiness extends Utilities{
+public class CaminhaoBusiness extends ValidationSession{
 
 	private static final long serialVersionUID = 1L;
 	@Inject private CaminhaoDao caminhaoDao; 
@@ -18,19 +19,19 @@ public class CaminhaoBusiness extends Utilities{
 		return caminhaoDao.listarUltimosCaminhoes();
 	}
 
-	protected void cadastrarCaminhao(Caminhao caminhao){
-		caminhaoDao.inserirCaminhao(caminhao);
+	protected void cadastrarCaminhao(Caminhao caminhao) throws ParseException{
+			caminhaoDao.inserirCaminhao(caminhao);
 	}
 	
-	protected void alterarCaminhao(Caminhao caminhao){
-		caminhaoDao.alterarCaminhao(caminhao);
+	protected void alterarCaminhao(Caminhao caminhao) throws ParseException{
+			caminhaoDao.alterarCaminhao(caminhao);
 	}
 	
-	protected void deletarCaminhao(Long id){
-		caminhaoDao.deletarCaminhao(caminhaoDao.buscarCaminhaoPorId(id));
+	protected void deletarCaminhao(Long id) throws ParseException{
+			caminhaoDao.deletarCaminhao(caminhaoDao.buscarCaminhaoPorId(id));
 	}
 	
-	protected Caminhao verCaminhao(Long id){
-		return caminhaoDao.buscarCaminhaoPorId(id);
+	protected Caminhao verCaminhao(Long id) throws ParseException{
+			return caminhaoDao.buscarCaminhaoPorId(id);
 	}
 }

@@ -6,11 +6,11 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 
-import br.com.retropatio.architecture.Querys;
+import br.com.retropatio.architecture.Persistences;
 import br.com.retropatio.model.Caminhao;
 import br.com.retropatio.session.UsuarioLogado;
 
-public class CaminhaoDao extends Querys{
+public class CaminhaoDao extends Persistences{
 	private static final long serialVersionUID = 1L;
 
 	@Inject private UsuarioLogado usuarioLogado;

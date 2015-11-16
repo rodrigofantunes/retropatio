@@ -4,7 +4,10 @@ import java.io.Serializable;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 import javax.inject.Inject;
 
@@ -13,10 +16,11 @@ import br.com.retropatio.model.Empresa;
 import br.com.retropatio.model.Usuario;
 import br.com.retropatio.session.UsuarioLogado;
 
-public class Utilities implements Serializable, UtilStatic, UtilList, Logger{
+public class Utilities implements Serializable, UtilStatic, Logger{
 
 	private static final long serialVersionUID = 1L;
-
+	private static SimpleDateFormat dateToString = new SimpleDateFormat("dd/MM/yyyy");
+	public static final String DATA_ATUAL = "dataAtual";
 	
 	@Inject protected UsuarioLogado usuarioLogado;
 	
@@ -26,10 +30,6 @@ public class Utilities implements Serializable, UtilStatic, UtilList, Logger{
 		return new BigInteger(1,m.digest()).toString(32);
 	}
 	
-	public static Date getDataAtual(){
-		return new Date();
-	}
-	
 	public Usuario preparaUsuarioLogin(Usuario usuario) throws NoSuchAlgorithmException{
 		usuario.setSenha(codificaSenha(usuario.getSenha()));
 		return usuario;
@@ -37,6 +37,17 @@ public class Utilities implements Serializable, UtilStatic, UtilList, Logger{
 	
 	public Usuario getUsuarioLogado(){
 		return usuarioLogado.getUsuario();
+	}
+	
+	public boolean isLogado(){
+		return usuarioLogado.isLogado();
+	}
+	
+	public UsuarioLogado getUsuario(){
+		return usuarioLogado;
+	}
+	public Empresa getEmpresaUsuario(){
+		return usuarioLogado.getEmpresa();
 	}
 	
 	public String getNomeUsuarioLogado(){
@@ -58,12 +69,16 @@ public class Utilities implements Serializable, UtilStatic, UtilList, Logger{
 	public void gravaUsuarioLogado(Usuario usuario){
 		usuarioLogado.logar(usuario);
 	}
-	
-	public boolean verificaSessaoLogada(){
-			if(usuarioLogado.getUsuario() == null || !usuarioLogado.isLogado() || usuarioLogado.getEmpresa() == null){
-				return false;
-			}		
-			return true;
+
+	public static String converteDataToString(Date data) {
+		if(data == null) return "";
+		return dateToString.format(data);
 	}
 	
+	public static Date getDataAtual(){  
+        Calendar calendar = new GregorianCalendar();  
+        Date date = new Date();  
+        calendar.setTime(date);  
+        return calendar.getTime();  
+    }
 }

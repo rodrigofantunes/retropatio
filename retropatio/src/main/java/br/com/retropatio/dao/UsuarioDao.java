@@ -7,11 +7,10 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 
-import br.com.retropatio.architecture.Querys;
-import br.com.retropatio.model.Pesquisa;
+import br.com.retropatio.architecture.Persistences;
 import br.com.retropatio.model.Usuario;
 
-public class UsuarioDao extends Querys{
+public class UsuarioDao extends Persistences{
 
 	private static final long serialVersionUID = 1L;
 	private final EntityManager em;
@@ -28,7 +27,7 @@ public class UsuarioDao extends Querys{
 	
 	public Usuario buscarPorId(Long id) { return em.find(Usuario.class, id); }
 
-	public void inserir(Usuario usuario) { em.persist(usuario); }
+	public void inserir(Usuario usuario) { persistUsuario(usuario,em); }
 	
 	public void alterar(Usuario usuario) { em.merge(usuario); }
 	
@@ -57,35 +56,35 @@ public class UsuarioDao extends Querys{
 		}
 	}
 	
-	@SuppressWarnings("unchecked")
-	public List<Usuario> buscaUsuario(Pesquisa pesquisa){
-		
-		switch(Integer.parseInt(pesquisa.getTipoPesquisa())){
-		
-		case CODIGO_USUARIO:
-			listaUsuarios = montaQry("from " + Usuario.class.getSimpleName() + " where id_usuario = ?")
-			.parametro(Long.parseLong(pesquisa.getTexto()))
-			.retornoLista(em);
-			break;
-			
-		case NOME_USUARIO:
-			listaUsuarios = montaQry("from " + Usuario.class.getSimpleName() + " where pessoa_id_pessoa in ( )")
-			.retornoLista(em);
-			break;
-			
-		case CPF_USUARIO:
-			listaUsuarios = montaQry("from " + Usuario.class.getSimpleName() + " where pessoa_id_pessoa in ( )")
-			.retornoLista(em);
-			break;
-			
-		case TODOS_USUARIOS:
-			listaUsuarios = montaQry("from " + Usuario.class.getSimpleName() + " where pessoa_id_pessoa in ( )")
-			.retornoLista(em);
-			break;
-		}
-		
-		return listaUsuarios;
-	}	
+//	@SuppressWarnings("unchecked")
+//	public List<Usuario> buscaUsuario(Consulta consulta){
+//		
+//		switch(Integer.parseInt(consulta.getTipoPesquisa())){
+//		
+//		case CODIGO_USUARIO:
+//			listaUsuarios = montaQry("from " + Usuario.class.getSimpleName() + " where id_usuario = ?")
+//			.parametro(Long.parseLong(consulta.getTexto()))
+//			.retornoLista(em);
+//			break;
+//			
+//		case NOME_USUARIO:
+//			listaUsuarios = montaQry("from " + Usuario.class.getSimpleName() + " where pessoa_id_pessoa in ( )")
+//			.retornoLista(em);
+//			break;
+//			
+//		case CPF_USUARIO:
+//			listaUsuarios = montaQry("from " + Usuario.class.getSimpleName() + " where pessoa_id_pessoa in ( )")
+//			.retornoLista(em);
+//			break;
+//			
+//		case TODOS_USUARIOS:
+//			listaUsuarios = montaQry("from " + Usuario.class.getSimpleName() + " where pessoa_id_pessoa in ( )")
+//			.retornoLista(em);
+//			break;
+//		}
+//		
+//		return listaUsuarios;
+//	}	
 	
 	public String verificarNickLogin(String login){
 		try{

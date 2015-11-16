@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+import br.com.retropatio.utilities.Utilities;
+
 
 @Entity
 public class Motorista {
@@ -20,8 +22,6 @@ public class Motorista {
 	private Date dataCadastro;
 	private Date dataAcesso;
 	
-	private String cpf;
-	private String cnh;
 	public Long getId() {
 		return id;
 	}
@@ -34,8 +34,8 @@ public class Motorista {
 	public void setPessoa(Pessoa pessoa) {
 		this.pessoa = pessoa;
 	}
-	public Date getDataCadastro() {
-		return dataCadastro;
+	public String getDataCadastro() {
+		return Utilities.converteDataToString(dataCadastro);
 	}
 	public void setDataCadastro(Date dataCadastro) {
 		this.dataCadastro = dataCadastro;
@@ -46,20 +46,4 @@ public class Motorista {
 	public void setDataAcesso(Date dataAcesso) {
 		this.dataAcesso = dataAcesso;
 	}
-	public String getCpf() {
-		return cpf;
-	}
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
-	public String getCnh() {
-		return cnh;
-	}
-	public void setCnh(String cnh) {
-		this.cnh = cnh;
-	}
-	
-
-	
-
 }

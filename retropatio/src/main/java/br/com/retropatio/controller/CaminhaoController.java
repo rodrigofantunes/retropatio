@@ -1,5 +1,7 @@
 package br.com.retropatio.controller;
 
+import java.text.ParseException;
+
 import javax.inject.Inject;
 
 import br.com.caelum.vraptor.Controller;
@@ -28,25 +30,32 @@ public class CaminhaoController extends CaminhaoBusiness {
 		result.include(listaUltimosCaminhoes());
 	}
 	
+	@Path("/caminhao/cadastro")
+	public void cadastro() throws ParseException { 
+		validaSessao(result);
+	}
+	
 	@Path("/caminhao/cadastrar")
-	public void cadastrar(Caminhao caminhao){
-		cadastrarCaminhao(caminhao);
-		result.redirectTo(this).index();
+	public void cadastrar(Caminhao caminhao) throws ParseException{
+		if(validaSessao(result)){
+			cadastrarCaminhao(caminhao);
+			result.redirectTo(this).index();
+		}
 	}
 
 	@Path("/caminhao/ver/{caminhao.id}")
-	public Caminhao verCaminhao(Long id) {
+	public Caminhao verCaminhao(Long id) throws ParseException {
 		return super.verCaminhao(id);
 	}
 	
 	@Path("/caminhao/alterar")
-	public void alterar(Caminhao caminhao){
+	public void alterar(Caminhao caminhao) throws ParseException{
 		alterarCaminhao(caminhao);
 		result.redirectTo(this).verCaminhao(caminhao.getId());
 	}
 	
 	@Path("/caminhao/deletar/{caminhao.id}")
-	public void deletar(Long id){
+	public void deletar(Long id) throws ParseException{
 		deletarCaminhao(id);
 		result.redirectTo(this).index();
 	}

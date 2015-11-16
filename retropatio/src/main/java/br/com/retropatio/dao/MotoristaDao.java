@@ -4,10 +4,10 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 
-import br.com.retropatio.architecture.Querys;
+import br.com.retropatio.architecture.Persistences;
 import br.com.retropatio.model.Motorista;
 
-public class MotoristaDao extends Querys{
+public class MotoristaDao extends Persistences{
 	private static final long serialVersionUID = 1L;
 
 	
@@ -22,7 +22,7 @@ public class MotoristaDao extends Querys{
 
 	public void inserirMotorista(Motorista motorista){
 		try {
-			em.persist(motorista);
+			persistMotorista(motorista,em);
 			gravaLogAcao(CADASTRAR_MOTORISTA,motorista);
 		} catch (NoResultException e) {
 			

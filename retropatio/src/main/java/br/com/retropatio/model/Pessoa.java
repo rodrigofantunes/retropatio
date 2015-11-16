@@ -15,6 +15,11 @@ public class Pessoa  {
 	
 	@NotNull @Size(min=5, max=150) private String nome;
 	
+	@Column(nullable = true)
+	private Long cpf;
+	
+	private String cnh;
+	
 	public Long getId() {
 		return id;
 	}
@@ -23,8 +28,15 @@ public class Pessoa  {
 		this.id = id;
 	}
 
-	@Column(nullable = true)
-	private Long cpf;
+	
+	public String getCnh() {
+		return cnh;
+	}
+
+	public void setCnh(String cnh) {
+		this.cnh = cnh;
+	}
+
 	
 	public Long getIdPessoa() {
 		return id;

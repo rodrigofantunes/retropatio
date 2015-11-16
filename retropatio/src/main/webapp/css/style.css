@@ -185,6 +185,7 @@ html, body {
 
 .demo-content {
   max-width: 1080px;
+      margin-top: 30px;
 }
 
 .demo-charts {
@@ -367,7 +368,10 @@ nav.mdl-navigation .mdl-badge[data-badge]:after {
   transition: 0.1s ease;
   cursor: pointer;
 }
-
+.btnPadraoCancelar{
+	color: #404040!important;
+	background: #CDD8CE!important;
+}
 .btnPadrao:hover,
 .btnPadrao:focus {
   opacity: 0.8;
@@ -382,8 +386,49 @@ nav.mdl-navigation .mdl-badge[data-badge]:after {
 }
 .right{
 	float:right;
+	    margin: 0px 5px 0px 0px;
 }
 .mdl-layout__drawer{
 	overflow-x:hidden;
 	overflow-y:auto;
+}
+input[type="text"]{
+	display: block;
+    margin: 0px -7px 10px 15px!important;
+    padding: 4px;
+    height: 32px;
+    border: none;
+    border-bottom: 1px solid #AAA;
+    font-size: 1.3em;
+    transition: 0.2s ease;
+    position:relative!important;
+}
+
+input[type="text"]:focus{
+  border-bottom: 2px solid #16a085;
+  color: #16a085;
+  transition: 0.2s ease;
+}
+.group-input{
+ 	    text-align: left; 
+}
+.margin-bottom-10{
+	        float: left;
+    height: 80px;
+}
+.error{
+    color:red;
+    margin: 0px 0px 10px 20px;
+}
+select{
+   	margin-top: 12px!important;
+    margin-left: 14px!important;
+    width: 98%!important;
+    color:#AAA;
+}
+select option{
+	color: initial!important;
+}
+.mdl-radio{
+	    margin-right: 35px;
 }

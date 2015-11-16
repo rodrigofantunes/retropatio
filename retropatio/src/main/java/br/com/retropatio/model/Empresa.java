@@ -14,7 +14,7 @@ public class Empresa {
 	@Id @GeneratedValue
 	private Long id;
 
-	@NotNull @Size(max=60) @Column(nullable = false) private String nome;
+	@NotNull @Size(max=60) @Column(nullable = false) private String nomeEmpresa;
 	
 	@Size(max=18) private Long cnpj;
 	
@@ -29,12 +29,12 @@ public class Empresa {
 		this.id = id;
 	}
 
-	public String getNome() {
-		return nome;
+	public String getNomeEmpresa() {
+		return nomeEmpresa;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setNomeEmpresa(String nome) {
+		this.nomeEmpresa = nome;
 	}
 
 	public Long getCnpj() {

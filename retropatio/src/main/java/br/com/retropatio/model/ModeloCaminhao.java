@@ -13,6 +13,14 @@ public class ModeloCaminhao {
 	@Id @GeneratedValue
 	private Long id;
 
-	@NotNull @Size(max=60) @Column(nullable = false) private String nome;
+	@NotNull @Size(max=60) @Column(nullable = false) private String nomeModelo;
+
+	public String getNomeModelo() {
+		return nomeModelo;
+	}
+
+	public void setNomeModelo(String nomeModelo) {
+		this.nomeModelo = nomeModelo;
+	}
 	
 }

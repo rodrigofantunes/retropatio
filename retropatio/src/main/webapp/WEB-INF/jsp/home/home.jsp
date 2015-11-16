@@ -14,22 +14,20 @@
 			    </tr>
 			  </thead>
 			  <tbody>
-			  <c:forEach var="entrada" items="${listaEntradas}">
+			  <c:forEach items="${listaEntradas}" var="entrada">
 				  <tr class="">
 				  	<td>${entrada.dataEntrada}</td>
 				  	<td>${entrada.motorista.pessoa.nome}</td>
 				  	<td>${entrada.caminhao.placa1} - ${entrada.caminhao.placa2}</td>
 				  	<td>${entrada.container.numero} - ${entrada.container.tamanho.tamanho}</td>
-				  	<td>${entrada.quadra.letra}${entrada.quadra.numero}-F${entrada.quadra.fileira}-${entrada.quadra.altura == 0 ? 'Piso' : 'A' + entrada.quadra.numero}</td>
+				  	<td>${entrada.quadra.letra}${entrada.quadra.numero}-F${entrada.quadra.fileira}-<c:if test="${entrada.quadra.altura == 0}" >Piso </c:if><c:if test="${entrada.quadra.altura > 0}" >A${entrada.quadra.numero}</c:if></td>
 				  	<td></td>
 				  </tr>
 			  </c:forEach>
 			  </tbody>
 			</table>
-         <div class="mdl-card__supporting-text mdl-color-text--grey-600">
-           <fmt:message key="label.5.ultimas.entradas"/>
-         </div>
          <div class="mdl-card__actions mdl-card--border">
+         <span class="mdl-card__supporting-text mdl-color-text--grey-600"><fmt:message key="label.ultimas.entradas"/></span>
            <a href="#" class="mdl-button mdl-js-button btnPadrao right" data-upgraded=",MaterialButton,MaterialRipple"><fmt:message key="label.cadastrar.entrada"/><span class="mdl-button__ripple-container"><span class="mdl-ripple"></span></span></a>
          </div>
        </div>
@@ -50,24 +48,22 @@
 			    </tr>
 			  </thead>
 			  <tbody>
-			  <c:forEach var="saida" items="${listaSaidas}">
+			  <c:forEach items="${listaSaidas}" var="saida" >
 				  <tr class="">
-				  	<td>${Saida.dataSaida}</td>
-				  	<td>${Saida.motorista.pessoa.nome}</td>
-				  	<td>${Saida.caminhao.placa1} - ${Saida.caminhao.placa2}</td>
-				  	<td>${Saida.container.numero} - ${Saida.container.tamanho.tamanho}</td>
-				  	<td>${Saida.quadra.letra}${Saida.quadra.numero}-F${Saida.quadra.fileira}-${Saida.quadra.altura == 0 ? 'Piso' : 'A' + entrada.quadra.numero}</td>
+				  	<td>${saida.dataSaida}</td>
+				  	<td>${saida.motorista.pessoa.nome}</td>
+				  	<td>${saida.caminhao.placa1} - ${saida.caminhao.placa2}</td>
+				  	<td>${saida.container.numero} - ${saida.container.tamanho.tamanho}</td>
+				  	<td>${saida.quadra.letra}${saida.quadra.numero}-F${saida.quadra.fileira}-<c:if test="${saida.quadra.altura == 0}" >Piso </c:if><c:if test="${saida.quadra.altura > 0}" >A${saida.quadra.numero}</c:if></td>
 				  	<td></td>
 				  </tr>
 			  </c:forEach>
 			  </tbody>
 			</table>
-         <div class="mdl-card__supporting-text mdl-color-text--grey-600">
-           <fmt:message key="label.5.ultimas.saidas"/>
-         </div>
-         <div class="mdl-card__actions mdl-card--border">
-           <a href="#" class="mdl-button mdl-js-button btnPadrao right" data-upgraded=",MaterialButton,MaterialRipple"><fmt:message key="label.cadastrar.saida"/><span class="mdl-button__ripple-container"><span class="mdl-ripple"></span></span></a>
-         </div>
+	         <div class="mdl-card__actions mdl-card--border">
+	           <span class="mdl-card__supporting-text mdl-color-text--grey-600"><fmt:message key="label.ultimas.saidas"/></span>
+	           <a href="#" class="mdl-button mdl-js-button btnPadrao right" data-upgraded=",MaterialButton,MaterialRipple"><fmt:message key="label.cadastrar.saida"/><span class="mdl-button__ripple-container"><span class="mdl-ripple"></span></span></a>
+	         </div>
        </div>
      </div>
      </c:if>

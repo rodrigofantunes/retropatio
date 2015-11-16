@@ -38,7 +38,7 @@ public class LoginController extends LoginBusiness {
 	
 	@Path("/login")
 	public void login(Usuario usuario) throws ParseException {
-		if(verificaSessaoLogada()){
+		if(validaSessaoLogin()){
 			result.redirectTo(HomeController.class).home();
 		}
 		result.include(usuario);

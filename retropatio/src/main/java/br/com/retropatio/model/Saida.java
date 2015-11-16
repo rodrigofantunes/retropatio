@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+import br.com.retropatio.utilities.Utilities;
+
 @Entity
 public class Saida {
 
@@ -70,8 +72,8 @@ public class Saida {
 		this.quadra = quadra;
 	}
 
-	public Date getDataSaida() {
-		return dataSaida;
+	public String getDataSaida() {
+		return Utilities.converteDataToString(dataSaida);
 	}
 
 	public void setDataSaida(Date dataSaida) {

@@ -13,6 +13,14 @@ public class Armador {
 	@Id @GeneratedValue
 	private Long id;
 
-	@NotNull @Size(max=60) @Column(nullable = false) private String nome;
+	@NotNull @Size(max=60) @Column(nullable = false) private String nomeArmador;
+
+	public String getNomeArmador() {
+		return nomeArmador;
+	}
+
+	public void setNomeArmador(String nomeArmador) {
+		this.nomeArmador = nomeArmador;
+	}
 	
 }

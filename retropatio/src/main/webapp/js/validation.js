@@ -61,6 +61,25 @@ function mensagem(msg){
 			});
 		});
 	},
+	letrasMaiusculas:function(){
+		$(this).on('keydown',function(){
+			var theEvent = event || window.event;
+			var key = theEvent.keyCode || theEvent.which;
+			if(key == 37 || key == 38 || key == 39 || key == 40 || key == 46) { 
+				return;
+			}
+			var value = $(this).val();
+			var words = value.toLowerCase().split(" ");
+			if(value.trim(value).length < 2) return;
+				for (var a = 0; a < words.length; a++) {
+				    var w = words[a];
+				    if(new RegExp('([^\da|das|de|di|do|dos])*[^da|das|de|di|do|dos]').test(w) && w != ""){
+				    	words[a] = w[0].toUpperCase() + w.slice(1);
+				    }
+				}
+				this.value = words.join(" ");
+			})
+		}
 	});
 	
 function validacaoEmail(texto, email){
@@ -90,7 +109,9 @@ function validaForm(options){
 		form.validate();
 		
 		var nome = form.find("input[name*='nome']");
-		if(nome.length){nome.rules("add",{required: true, minlength: 5, maxlength: 100 })}
+		if(nome.length){nome.rules("add",{required: true, minlength: 5, maxlength: 100, sobrenome: true});
+			nome.letrasMaiusculas();
+		}
 		
 		var login = form.find("input[name*='login']");
 		if(login.length){
@@ -121,6 +142,10 @@ function validaForm(options){
 		var nascimento = form.find("input[name*='nasc']");
 		if(nascimento.length){nascimento.rules("add",{datePTBR: true})}
 		
+		var cpf = form.find("input[name*='cpf']");
+		if(cpf.length){cpf.rules("add",{cpf: true, required: true});
+			aplicaMascaras(cpf);
+		}
 		var email = form.find("input[name*='email']");
 		if(email.length){
 			email.rules("add",{validaEmail: true})
@@ -129,9 +154,100 @@ function validaForm(options){
 			}
 		}
 		
+		var cnh = form.find("input[name*='cnh']");
+		if(cnh.length){cnh.rules("add",{required: true});}
+		
+		var placa = form.find("input[name*='placa']");
+		if(placa.length){placa.rules("add",{required: true});
+			aplicaMascaras(placa);
+		}
+		
+		var placa2 = form.find("input[name*='placa2']");
+		if(placa2.length){placa2.rules("add",{required: true});
+			aplicaMascaras(placa2);
+		}
+		var marca = form.find("input[name*='marca'], input[name*='nomeMarca']");
+		if(marca.length){marca.rules("add",{required: true});}
+		
+		var modelo = form.find("input[name*='modelo'], input[name*='nomeModelo']");
+		if(modelo.length){modelo.rules("add",{required: true});}
+		
+		var nomeEmpresa = form.find("input[name*='nomeEmpresa']");
+		if(nomeEmpresa.length){nomeEmpresa.rules("add",{required: true});}
+		
+		var contnumero = form.find("input[name*='container.numero']");
+		if(contnumero.length){
+			contnumero.rules("add",{required: true});
+			aplicaMascaras(contnumero);
+		}
+		
+		var selects = form.find("select");
+		if(selects.length){
+			selects.each(function(){
+				$(this).rules("add",{validaSelect: true});
+			})
+		}
+		
+		var rangeDatas = form.find("input[name*='dataInicial'],input[name*='dataFinal'],input[name*='dataCadastro']");
+		if(rangeDatas.length){
+			rangeDatas.each(function(){
+				$(this).rules("add",{required: true});
+				aplicaMascaras($(this));
+			})
+		}
 	})
 }
 
+function aplicaMascaras(elemento){
+	elemento.keydown(function(event){
+		var mask = elemento.attr("mascara");
+		if(mask) return;
+		var name = elemento.attr("name");
+		var theEvent = event || window.event;
+		var key = theEvent.keyCode || theEvent.which;
+		if(key == 37 || key == 38 || key == 39 || key == 40 || key == 46 || mask == "true") { 
+			return;
+		}
+		var regex = [/data/ig,/cpf/ig,/placa/ig,/container/ig];
+		var mascaras = ['99/99/9999','999.999.999-99','aaa-9999','aaaa-999999-9'];
+		elemento.unmask();
+		
+		for(i = 0; i < regex.length; i++){
+			if(new RegExp(regex[i]).test(name)){
+				elemento.mask(mascaras[i]).attr("mascara",true);
+				return;
+			}
+		}
+	});
+}
+
+function limpaCampos(){
+	$(document).each(function(){
+		$("[type='text'], [type='password']").val("").text("");
+		$("[type='checkbox']").first().attr("checked",true);
+		$("[type='radio']").attr("checked",false);
+		var selects = $("select");
+		selects.each(function(){
+			$(this).css({"color":"#AAA"}).find("option:first").prop("selected",true);
+		})
+		
+		var labels = $("label.error");
+			labels.each(function(){
+				$(this).remove();
+			})
+			
+		var inputsError = $("input.error")
+			inputsError.each(function(){
+				$(this).removeClass("error");
+			})
+	})
+}
+
+function formSubmit(){
+	if ($(document.forms[0]).valid()) {
+		document.forms[0].submit();
+    }
+}
 
 /** MODAL **/
 
@@ -270,8 +386,7 @@ function criaJanelaModal(tipo){
 		janelaPrincipal.append(btnOK);
 	}
 	body.append(janelaPrincipal);
-	janelaPrincipal.center();
-	janelaPrincipal.fadeIn(250);
+	janelaPrincipal.center().fadeIn(250);
 	
 }
 

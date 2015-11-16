@@ -1532,3 +1532,32 @@ jQuery.validator.addMethod("validaEmail", function(value, element) {
 		var patterns = new RegExp(/^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?$/i);
 	  return this.optional(element) || patterns.test(value);
 	}, "Por favor, digite um email válido");
+
+jQuery.validator.addMethod("sobrenome", function(value, element) {
+ var nomes = value.trim(value).split(" ");
+  return nomes.length > 1 ? true:false;
+}, "Por favor, digite um sobrenome");
+
+
+jQuery.validator.addMethod("primeirasMaiusculas", function(value, element) {
+	var words = value.trim(value).toLowerCase().split(" ");
+	for (var a = 0; a < words.length; a++) {
+	    var w = words[a];
+	    words[a] = w[0].toUpperCase() + w.slice(1);
+	}
+	element.value = words.join(" ");
+	return true;
+}, "");
+
+jQuery.validator.addMethod("validaSelect", function(value, element) {
+	var element = $(element);
+	var selected = element.val();
+	if(selected == 0 || selected == "" || selected == -1){
+		element.css({"color":"#AAA"});
+		return false;
+	}
+	element.css({"color":"initial"});
+	element.find("option:first").css("color:#AAA!imortant");
+	return true;
+}, "Este campo é requerido.");
+
