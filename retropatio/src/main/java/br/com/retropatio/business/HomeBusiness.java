@@ -6,6 +6,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import br.com.caelum.vraptor.Result;
+import br.com.retropatio.controller.LoginController;
 import br.com.retropatio.dao.EntradaDao;
 import br.com.retropatio.dao.SaidaDao;
 import br.com.retropatio.model.Entrada;
@@ -33,5 +34,12 @@ public class HomeBusiness extends UsuarioBusiness {
 	
 	private List<Entrada> getCincoUltimasEntradas(){
 		return entradaDao.getListaCincoUltimasEntradas();
+	}
+
+	public void logOff() throws ParseException {
+		gravaLogAcaoLogOff(LOGOFF, usuarioLogado.getUsuario(), this);
+		usuarioLogado.deslogar();
+		result.redirectTo(LoginController.class).login(null);
+		
 	}
 }

@@ -14,15 +14,15 @@ public class MotoristaBusiness extends ValidationSession{
 	private static final long serialVersionUID = 1L;
 	@Inject private MotoristaDao motoristaDao; 
 	
-	protected void cadastrarMotorista(Motorista motorista) throws ParseException{
+	protected void cadastrarMotorista(Motorista motorista) throws ParseException, IllegalArgumentException, NoSuchFieldException, SecurityException{
 			motoristaDao.inserirMotorista(motorista);
 	}
 	
-	protected void alterarMotorista(Motorista motorista) throws ParseException{
+	protected void alterarMotorista(Motorista motorista) throws ParseException, IllegalArgumentException, NoSuchFieldException, SecurityException{
 			motoristaDao.alterarMotorista(motorista);
 	}
 	
-	protected void deletarMotorista(Long id) throws ParseException{
+	protected void deletarMotorista(Long id) throws ParseException, IllegalArgumentException, NoSuchFieldException, SecurityException{
 			motoristaDao.deletarMotorista(motoristaDao.buscarMotoristaPorId(id));
 	}
 	

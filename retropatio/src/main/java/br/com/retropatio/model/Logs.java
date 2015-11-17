@@ -5,7 +5,6 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 
 @Entity
 public class Logs {
@@ -13,11 +12,9 @@ public class Logs {
 	@Id @GeneratedValue
 	private Long id;
 
-	@OneToOne
-	private Empresa empresa;
+	private Long idEmpresa;
 	
-	@OneToOne
-	private Usuario usuario;
+	private Long idUsuario;
 	
 	private Date dataAcao;
 	
@@ -27,28 +24,14 @@ public class Logs {
 	
 	private String idModulo;
 	
+	private String informacoes;
+	
 	public Long getId() {
 		return id;
 	}
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public Empresa getEmpresa() {
-		return empresa;
-	}
-
-	public void setEmpresa(Empresa empresa) {
-		this.empresa = empresa;
-	}
-
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
 	}
 
 	public Date getDataAcao() {
@@ -81,6 +64,30 @@ public class Logs {
 
 	public void setIdModulo(String idModulo) {
 		this.idModulo = idModulo;
+	}
+
+	public String getInformacoes() {
+		return informacoes;
+	}
+
+	public void setInformacoes(String informacoes) {
+		this.informacoes = informacoes;
+	}
+
+	public Long getIdEmpresa() {
+		return idEmpresa;
+	}
+
+	public void setIdEmpresa(Long idEmpresa) {
+		this.idEmpresa = idEmpresa;
+	}
+
+	public Long getIdUsuario() {
+		return idUsuario;
+	}
+
+	public void setIdUsuario(Long idUsuario) {
+		this.idUsuario = idUsuario;
 	}
 	
 	

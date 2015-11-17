@@ -40,6 +40,9 @@ public class LoginController extends LoginBusiness {
 	public void login(Usuario usuario) throws ParseException {
 		if(validaSessaoLogin()){
 			result.redirectTo(HomeController.class).home();
+			if(isSessionValid()) {
+				result.include("atencao", "Sua sessão expirou, favor entre com seu login novamente.");
+			}
 		}
 		result.include(usuario);
 	}

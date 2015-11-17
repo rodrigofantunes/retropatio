@@ -21,6 +21,7 @@ public class UsuarioBusiness extends ValidationSession{
 		usuarioParaAutenticar = usuarioDao.autenticar(preparaUsuarioLogin(usuario));
 		if( usuarioParaAutenticar != null ){
 			gravaUsuarioLogado(usuarioParaAutenticar);
+			gravaLogAcaoLogin(LOGIN, usuarioParaAutenticar, this);
 			retorno = true;
 		}
 		return retorno;

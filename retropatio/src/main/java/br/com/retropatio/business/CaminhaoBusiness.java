@@ -19,15 +19,15 @@ public class CaminhaoBusiness extends ValidationSession{
 		return caminhaoDao.listarUltimosCaminhoes();
 	}
 
-	protected void cadastrarCaminhao(Caminhao caminhao) throws ParseException{
+	protected void cadastrarCaminhao(Caminhao caminhao) throws ParseException, IllegalArgumentException, NoSuchFieldException, SecurityException{
 			caminhaoDao.inserirCaminhao(caminhao);
 	}
 	
-	protected void alterarCaminhao(Caminhao caminhao) throws ParseException{
+	protected void alterarCaminhao(Caminhao caminhao) throws ParseException, IllegalArgumentException, NoSuchFieldException, SecurityException{
 			caminhaoDao.alterarCaminhao(caminhao);
 	}
 	
-	protected void deletarCaminhao(Long id) throws ParseException{
+	protected void deletarCaminhao(Long id) throws ParseException, IllegalArgumentException, NoSuchFieldException, SecurityException{
 			caminhaoDao.deletarCaminhao(caminhaoDao.buscarCaminhaoPorId(id));
 	}
 	

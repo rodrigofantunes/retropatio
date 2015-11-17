@@ -1,26 +1,31 @@
 package br.com.retropatio.utilities;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Locale;
+import java.util.Properties;
 
 import javax.inject.Inject;
 
-import br.com.retropatio.architecture.Logger;
 import br.com.retropatio.model.Empresa;
 import br.com.retropatio.model.Usuario;
 import br.com.retropatio.session.UsuarioLogado;
 
-public class Utilities implements Serializable, UtilStatic, Logger{
+public class Utilities implements Serializable, UtilStatic{
 
 	private static final long serialVersionUID = 1L;
 	private static SimpleDateFormat dateToString = new SimpleDateFormat("dd/MM/yyyy");
-	public static final String DATA_ATUAL = "dataAtual";
+	private static final String MESSAGES_PROPERTIES = "/messages.properties";
+	private static final Properties properties = new Properties();
 	
 	@Inject protected UsuarioLogado usuarioLogado;
 	
@@ -34,6 +39,28 @@ public class Utilities implements Serializable, UtilStatic, Logger{
 		usuario.setSenha(codificaSenha(usuario.getSenha()));
 		return usuario;
 	}
+	
+	public static String getMessage(String key){
+		String retorno = null;
+		try{ 				
+			if(properties==null){
+				properties.load(new String().getClass().getResourceAsStream(MESSAGES_PROPERTIES));
+			}				
+		 	if(key != null){
+		 		retorno = properties.getProperty(key);
+		 	}
+	 		return retorno;
+		}catch (IOException e) {
+			return null;
+		}
+	 }	
+	
+	public static Date getDataAtual(){  
+        Calendar calendar = new GregorianCalendar();  
+        Date date = new Date();  
+        calendar.setTime(date);  
+        return calendar.getTime();  
+    }
 	
 	public Usuario getUsuarioLogado(){
 		return usuarioLogado.getUsuario();
@@ -75,10 +102,16 @@ public class Utilities implements Serializable, UtilStatic, Logger{
 		return dateToString.format(data);
 	}
 	
-	public static Date getDataAtual(){  
-        Calendar calendar = new GregorianCalendar();  
-        Date date = new Date();  
-        calendar.setTime(date);  
-        return calendar.getTime();  
-    }
+	public static Long removeCaracterCPF(String cpf){
+		if(cpf == "" || cpf == null) return Long.parseLong("0");
+		return Long.parseLong(cpf.trim().replaceAll("[.|-]", ""));
+	}
+	
+	public String formataDataLongStringToDateShortString(String data) throws ParseException{
+	    DateFormat formatter = new SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy", Locale.US);
+	    Date date = (Date)formatter.parse(data.toString());
+	    Calendar cal = Calendar.getInstance();
+	    cal.setTime(date);
+	    return cal.get(Calendar.DATE) + "/" + (cal.get(Calendar.MONTH) + 1) +"/" + cal.get(Calendar.YEAR);
+	}
 }

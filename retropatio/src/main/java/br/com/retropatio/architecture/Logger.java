@@ -1,52 +1,25 @@
 package br.com.retropatio.architecture;
 
-import java.lang.reflect.Field;
-
 import javax.inject.Inject;
+import javax.persistence.EntityManager;
 
 import br.com.retropatio.dao.LoggerDao;
-import br.com.retropatio.model.Logs;
-import br.com.retropatio.utilities.Utilities;
+import br.com.retropatio.model.Usuario;
 
+public class Logger extends Persistences {
 
-
-public interface Logger{
-
-	@Inject LoggerDao loggerDao = null;
+	private static final long serialVersionUID = 1L;
+	@Inject private LoggerDao loggerDao;
 	
-	public default void gravaLogAcao(String tipo, Object classe) {
-		String modulo, id;
-		try {
-			modulo = classe.getClass().getSimpleName();
-			id = getValueField(classe);
-			loggerDao.gravarLog(preparaLog(tipo, modulo, id));
-		} catch (SecurityException | NoSuchFieldException | IllegalArgumentException | IllegalAccessException e) {
-			e.printStackTrace();
-		}
-		
+	public void gravaLogAcao(String tipo, Object classe, EntityManager em){
+		loggerDao.gravaLogAcao(tipo, classe, em);
 	}
 	
-	default Logs preparaLog(String tipo, String modulo, String id){
-		Logs log = new Logs();
-		log.setEmpresa(new Utilities().getEmpresaUsuarioLogado());
-		log.setUsuario(new Utilities().getUsuarioLogado());
-		log.setDataAcao(Utilities.getDataAtual());
-		log.setTipoAcao(tipo);
-		log.setModulo(modulo);
-		log.setIdModulo(id);
-		return log;
+	public void gravaLogAcaoLogin(String tipo, Usuario userLogin, Object classe){
+		loggerDao.gravaLogAcaoLogin(tipo, userLogin, classe);
 	}
 	
-	default String getValueField(Object classe) throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException{
-	    Field[] fields = classe.getClass().getDeclaredFields();
-	    for (Field field : fields) {
-	    	field.setAccessible(true);
-	    	String fieldValue = field.getName() == "id" ? field.get(classe).toString() : "";
-	    	if(fieldValue != null){
-	    		return fieldValue.toString();
-	    	}
-		}
-	    return "";
+	public void gravaLogAcaoLogOff(String tipo, Usuario userLogin, Object classe){
+		loggerDao.gravaLogAcaoLogOff(tipo, userLogin, classe);
 	}
-	
 }

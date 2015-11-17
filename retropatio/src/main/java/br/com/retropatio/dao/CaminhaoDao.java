@@ -6,11 +6,11 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 
-import br.com.retropatio.architecture.Persistences;
+import br.com.retropatio.architecture.Logger;
 import br.com.retropatio.model.Caminhao;
 import br.com.retropatio.session.UsuarioLogado;
 
-public class CaminhaoDao extends Persistences{
+public class CaminhaoDao extends Logger{
 	private static final long serialVersionUID = 1L;
 
 	@Inject private UsuarioLogado usuarioLogado;
@@ -24,10 +24,10 @@ public class CaminhaoDao extends Persistences{
 		this.em = entityManager;
 	}
 
-	public void inserirCaminhao(Caminhao caminhao){
+	public void inserirCaminhao(Caminhao caminhao) throws IllegalArgumentException, NoSuchFieldException, SecurityException{
 		try {
 			em.persist(caminhao);
-			gravaLogAcao(CADASTRAR_CAMINHAO,caminhao);
+			gravaLogAcao(CADASTRAR_CAMINHAO,caminhao, em);
 		} catch (NoResultException e) {
 			
 		}
@@ -37,19 +37,19 @@ public class CaminhaoDao extends Persistences{
 		return em.find(Caminhao.class, id);
 	}
 	
-	public void alterarCaminhao(Caminhao caminhao) {
+	public void alterarCaminhao(Caminhao caminhao) throws IllegalArgumentException, NoSuchFieldException, SecurityException {
 		try {
 			em.merge(caminhao);
-			gravaLogAcao(ALTERAR_CAMINHAO,caminhao);
+			gravaLogAcao(ALTERAR_CAMINHAO,caminhao, em);
 		} catch (NoResultException e) {
 			
 		}
 	}
 	
-	public void deletarCaminhao(Caminhao caminhao) {
+	public void deletarCaminhao(Caminhao caminhao) throws IllegalArgumentException, NoSuchFieldException, SecurityException {
 		try {
 			em.remove(em.merge(caminhao));
-			gravaLogAcao(DELETAR_CAMINHAO,caminhao);
+			gravaLogAcao(DELETAR_CAMINHAO,caminhao, em);
 		} catch (NoResultException e) {
 			
 		}

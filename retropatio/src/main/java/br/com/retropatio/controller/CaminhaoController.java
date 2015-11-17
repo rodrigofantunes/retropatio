@@ -36,7 +36,7 @@ public class CaminhaoController extends CaminhaoBusiness {
 	}
 	
 	@Path("/caminhao/cadastrar")
-	public void cadastrar(Caminhao caminhao) throws ParseException{
+	public void cadastrar(Caminhao caminhao) throws ParseException, IllegalArgumentException, NoSuchFieldException, SecurityException{
 		if(validaSessao(result)){
 			cadastrarCaminhao(caminhao);
 			result.redirectTo(this).index();
@@ -49,13 +49,13 @@ public class CaminhaoController extends CaminhaoBusiness {
 	}
 	
 	@Path("/caminhao/alterar")
-	public void alterar(Caminhao caminhao) throws ParseException{
+	public void alterar(Caminhao caminhao) throws ParseException, IllegalArgumentException, NoSuchFieldException, SecurityException{
 		alterarCaminhao(caminhao);
 		result.redirectTo(this).verCaminhao(caminhao.getId());
 	}
 	
 	@Path("/caminhao/deletar/{caminhao.id}")
-	public void deletar(Long id) throws ParseException{
+	public void deletar(Long id) throws ParseException, IllegalArgumentException, NoSuchFieldException, SecurityException{
 		deletarCaminhao(id);
 		result.redirectTo(this).index();
 	}
