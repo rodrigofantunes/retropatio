@@ -13,17 +13,11 @@ public class Logs {
 	private Long id;
 
 	private Long idEmpresa;
-	
 	private Long idUsuario;
-	
 	private Date dataAcao;
-	
 	private String tipoAcao;
-	
 	private String modulo;
-	
 	private String idModulo;
-	
 	private String informacoes;
 	
 	public Long getId() {

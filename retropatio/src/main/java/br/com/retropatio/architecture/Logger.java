@@ -1,5 +1,7 @@
 package br.com.retropatio.architecture;
 
+import java.text.ParseException;
+
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
@@ -15,7 +17,7 @@ public class Logger extends Persistences {
 		loggerDao.gravaLogAcao(tipo, classe, em);
 	}
 	
-	public void gravaLogAcaoLogin(String tipo, Usuario userLogin, Object classe){
+	public void gravaLogAcaoLogin(String tipo, Usuario userLogin, Object classe) throws ParseException, IllegalArgumentException, IllegalAccessException{
 		loggerDao.gravaLogAcaoLogin(tipo, userLogin, classe);
 	}
 	

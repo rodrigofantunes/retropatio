@@ -13,12 +13,8 @@ import br.com.retropatio.utilities.Utilities;
 @Entity
 public class Motorista {
 
-	@Id @GeneratedValue
-	private Long id;
-	
-	@OneToOne
-	private Pessoa pessoa;
-	
+	@Id @GeneratedValue private Long id;
+	@OneToOne private Pessoa pessoa;
 	private Date dataCadastro;
 	private Date dataAcesso;
 	

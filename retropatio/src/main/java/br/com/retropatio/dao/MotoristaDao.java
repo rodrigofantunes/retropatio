@@ -19,7 +19,7 @@ public class MotoristaDao extends Logger{
 		this.em = entityManager;
 	}
 
-	public void inserirMotorista(Motorista motorista) throws IllegalArgumentException, NoSuchFieldException, SecurityException{
+	public void inserirMotorista(Motorista motorista) throws Exception{
 		try {persistMotorista(motorista,em);}
 		catch (NoResultException e){}
 		gravaLogAcao(CADASTRAR_MOTORISTA,motorista,em);
@@ -29,13 +29,13 @@ public class MotoristaDao extends Logger{
 		return em.find(Motorista.class, id);
 	}
 	
-	public void alterarMotorista(Motorista motorista) throws IllegalArgumentException, NoSuchFieldException, SecurityException {
+	public void alterarMotorista(Motorista motorista) throws Exception {
 		try { em.merge(motorista);} 
 		catch (NoResultException e){}
 		gravaLogAcao(ALTERAR_MOTORISTA,motorista, em);
 	}
 	
-	public void deletarMotorista(Motorista motorista) throws IllegalArgumentException, NoSuchFieldException, SecurityException {
+	public void deletarMotorista(Motorista motorista) throws Exception {
 		try {em.remove(em.merge(motorista));}
 		catch (NoResultException e) {}
 		gravaLogAcao(DELETAR_MOTORISTA,motorista, em);

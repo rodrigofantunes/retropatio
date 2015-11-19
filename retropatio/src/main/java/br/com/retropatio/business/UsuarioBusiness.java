@@ -14,17 +14,16 @@ public class UsuarioBusiness extends ValidationSession{
 
 	private static final long serialVersionUID = 1L;
 	@Inject private UsuarioDao usuarioDao;
-
-	protected boolean efetuarAutenticacao(Usuario usuario) throws NoSuchAlgorithmException, ParseException{
-		boolean retorno = false;
+	protected boolean efetuarAutenticacao(Usuario usuario) throws NoSuchAlgorithmException, ParseException, IllegalArgumentException, IllegalAccessException{
 		Usuario usuarioParaAutenticar = new Usuario();
 		usuarioParaAutenticar = usuarioDao.autenticar(preparaUsuarioLogin(usuario));
 		if( usuarioParaAutenticar != null ){
 			gravaUsuarioLogado(usuarioParaAutenticar);
 			gravaLogAcaoLogin(LOGIN, usuarioParaAutenticar, this);
-			retorno = true;
+			return true;
 		}
-		return retorno;
+		gravaLogAcaoLogin(TENTATIVA_LOGIN, usuario, this);
+		return false;
 	}
 
 	protected void cadastrarUsuario(Usuario usuario) throws NoSuchAlgorithmException, ParseException{

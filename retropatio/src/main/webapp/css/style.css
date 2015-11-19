@@ -435,3 +435,6 @@ select option{
 .label-menor{
 	font-size:12px
 }
+.label-menor label{
+	position:absolute;
+}

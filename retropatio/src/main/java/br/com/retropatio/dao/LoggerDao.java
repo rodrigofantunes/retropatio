@@ -16,6 +16,7 @@ public class LoggerDao extends Querys{
 
 	private static final long serialVersionUID = 1L;
 	private final EntityManager em;
+	@Inject private FailureDao failure;
 	Logs log = null;
 	public LoggerDao() {
 		this(null);
@@ -28,8 +29,9 @@ public class LoggerDao extends Querys{
 	public void gravarLog(Logs logs, EntityManager em){
 		try {
 			em.persist(logs);
+			em.getTransaction().commit();
 		} catch (NoResultException e) {
-			
+			System.out.println(e.getMessage());
 		}
 	}
 	
@@ -39,15 +41,23 @@ public class LoggerDao extends Querys{
 		
 	}
 	
-	public void gravaLogAcaoLogin(String tipo, Usuario userLogin, Object classe){
-		getDadosLoginPadrao();
-		log.setTipoAcao(tipo);
+	public void gravaLogAcaoLogin(String tipo, Usuario userLogin, Object classe) throws ParseException, IllegalArgumentException, IllegalAccessException{
+		getDadosLoginPadrao(tipo);
+		if(tipo.equals(TENTATIVA_LOGIN)){
+			log.setInformacoes("Login: " + userLogin.getLogin() + ", Senha: " + userLogin.getSenha());
+		}
+		else {
+			log.setInformacoes(userLogin.getPessoa().getNome() + " - " + userLogin.getPerfil().getNome());
+			log.setIdModulo(userLogin.getId().toString());
+		}
 		log.setModulo(classe.getClass().getSimpleName());
 		log.setModulo(log.getModulo().replace("$Proxy$_$$_WeldSubclass", ""));
-		log.setIdModulo(userLogin.getId().toString());
-		log.setInformacoes(userLogin.getPessoa().getNome() + " - " + userLogin.getPerfil().getNome());
 		try {
-			gravarLog(log, em);
+			if(!tipo.equals(TENTATIVA_LOGIN)){
+				gravarLog(log, em);
+			}else{
+				failure.gravarFalha(log);
+			}
 			log = null;
 		} catch (SecurityException e) {
 			e.printStackTrace();
@@ -55,7 +65,7 @@ public class LoggerDao extends Querys{
 	}
 	
 	public void gravaLogAcaoLogOff(String tipo, Usuario userLogin, Object classe){
-		getDadosLoginPadrao();
+		getDadosLoginPadrao(tipo);
 		log.setTipoAcao(tipo);
 		log.setModulo("LogOff");
 		log.setIdModulo(userLogin.getId().toString());
@@ -74,7 +84,7 @@ public class LoggerDao extends Querys{
 			modulo = classe.getClass().getSimpleName();
 			id = getValueField(classe);
 			preparaLog(tipo, modulo, id);
-			getInformacoes(classe);
+			log.setInformacoes(getInformacoes(classe));
 			gravarLog(log, em);
 			log = null;
 		} catch (Exception e) {
@@ -84,7 +94,7 @@ public class LoggerDao extends Querys{
 	}
 	
 	private void preparaLog(String tipo, String modulo, String id){
-		getDadosLoginPadrao();
+		getDadosLoginPadrao(tipo);
 		log.setTipoAcao(tipo);
 		log.setModulo(modulo);
 		log.setIdModulo(id);
@@ -103,37 +113,18 @@ public class LoggerDao extends Querys{
 	    return "";
 	}
 	
-	private void getDadosLoginPadrao(){
+	private void getDadosLoginPadrao(String tipo){
 		log = new Logs();
-		log.setIdEmpresa(usuarioLogado.getEmpresa().getId());
-		log.setIdUsuario(usuarioLogado.getUsuarioLogado().getId());
+		if(!tipo.equals(TENTATIVA_LOGIN)){ 
+			log.setIdEmpresa(usuarioLogado.getEmpresa().getId());
+			log.setIdUsuario(usuarioLogado.getUsuarioLogado().getId());
+		}else{
+			log.setIdUsuario(null);
+			log.setIdEmpresa(null);
+		}
 		log.setDataAcao(getDataAtual());
+		log.setTipoAcao(tipo);
 	}
 	
-	private void getInformacoes(Object classe) throws IllegalArgumentException, IllegalAccessException, ParseException{
-		 Field[] fields = classe.getClass().getDeclaredFields();
-		 StringBuilder texto = new StringBuilder();
-		    for (Field field : fields) {
-		    	field.setAccessible(true);
-		    	String fieldValue = field.get(classe) != null ? field.get(classe).toString() : null;
-		    	if(fieldValue != null && !fieldValue.contains("br.com.retropatio")){
-		    		if(texto.length() > 1){
-		    			if(field.getName().contains("data")){
-		    				texto.append(", " + field.getName() + ": " + formataDataLongStringToDateShortString(fieldValue));
-		    			}else{
-		    				texto.append(", " + field.getName() + ": " + fieldValue.toString());
-		    			}
-		    		}
-		    		else{
-		    			if(field.getName().contains("data")){
-		    				texto.append(field.getName() + ": " + formataDataLongStringToDateShortString(fieldValue));
-		    			}else{
-		    				texto.append(field.getName() + ": " + fieldValue.toString());
-		    			}
-		    		}
-		    	}
-			}
-		    
-		    log.setInformacoes(texto.toString());
-	}
+	
 }

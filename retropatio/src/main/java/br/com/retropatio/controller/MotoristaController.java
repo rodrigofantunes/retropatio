@@ -33,18 +33,23 @@ public class MotoristaController extends MotoristaBusiness {
 	public void index() { }
 	
 	@Path("/motorista/cadastro")
-	public void cadastro(Motorista motorista) throws ParseException, IllegalArgumentException, NoSuchFieldException, SecurityException{ 
+	public void cadastro(Motorista motorista) throws ParseException, Exception{ 
 		if(validaSessao(result)){
 			result.include(DATA_ATUAL,converteDataToString(getDataAtual()));
 		}
 	}
 	
 	@Path("/motorista/cadastrar")
-	public void cadastrar(Motorista motorista) throws ParseException, IllegalArgumentException, NoSuchFieldException, SecurityException{
+	public void cadastrar(Motorista motorista) throws ParseException, Exception{
 		if(validaSessao(result)){
+			try{
 				cadastrarMotorista(motorista);
-				validation.add(new SimpleMessage("mensagem", "Motorista cadastrado com sucesso!")).onErrorRedirectTo(MotoristaController.class).cadastro(null);
-				result.redirectTo(this).cadastro(null);
+				result.forwardTo(this).cadastro(null);
+				validation.add(new SimpleMessage("mensagem", "Motorista cadastrado com sucesso!"));
+			}catch(Exception ex){
+				System.out.println(ex.getMessage() + " - " + ex.getCause());
+				validation.add(new SimpleMessage("mensagem", ex.getMessage() + " - " + ex.getCause())).onErrorRedirectTo(MotoristaController.class).cadastro(null);
+			}
 		}
 	}
 
@@ -54,13 +59,13 @@ public class MotoristaController extends MotoristaBusiness {
 	}
 	
 	@Path("/motorista/alterar")
-	public void alterar(Motorista motorista) throws ParseException, IllegalArgumentException, NoSuchFieldException, SecurityException{
+	public void alterar(Motorista motorista) throws ParseException, Exception{
 		alterarMotorista(motorista);
 		result.redirectTo(this).verMotorista(motorista.getId());
 	}
 	
 	@Path("/motorista/deletar/{motorista.id}")
-	public void deletar(Long id) throws ParseException, IllegalArgumentException, NoSuchFieldException, SecurityException{
+	public void deletar(Long id) throws ParseException, Exception{
 		deletarMotorista(id);
 		result.redirectTo(this).index();
 	}

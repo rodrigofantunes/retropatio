@@ -165,5 +165,13 @@ private void limpaParametros(){
 	parametro.clear();
 }
 
+public void executar(EntityManager em){
+	qry = em.createNativeQuery(query);
+    if(maximoResultado > 0) qry.setMaxResults(maximoResultado);
+	if(parametro.size() > 0){
+		verificaParametros();
+	}
+	qry.executeUpdate();
+}
 
 }

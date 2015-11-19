@@ -2,6 +2,7 @@ package br.com.retropatio.utilities;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.lang.reflect.Field;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -113,5 +114,37 @@ public class Utilities implements Serializable, UtilStatic{
 	    Calendar cal = Calendar.getInstance();
 	    cal.setTime(date);
 	    return cal.get(Calendar.DATE) + "/" + (cal.get(Calendar.MONTH) + 1) +"/" + cal.get(Calendar.YEAR);
+	}
+	
+	public String converteDateToDataMysql(Date data){
+		DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		return formatter.format(data);
+	}
+	
+	protected String getInformacoes(Object classe) throws IllegalArgumentException, IllegalAccessException, ParseException{
+		 Field[] fields = classe.getClass().getDeclaredFields();
+		 StringBuilder texto = new StringBuilder();
+		    for (Field field : fields) {
+		    	field.setAccessible(true);
+		    	String fieldValue = field.get(classe) != null ? field.get(classe).toString() : null;
+		    	if(fieldValue != null && !fieldValue.contains("br.com.retropatio")){
+		    		if(texto.length() > 1){
+		    			if(field.getName().contains("data")){
+		    				texto.append(", " + field.getName() + ": " + formataDataLongStringToDateShortString(fieldValue));
+		    			}else{
+		    				texto.append(", " + field.getName() + ": " + fieldValue.toString());
+		    			}
+		    		}
+		    		else{
+		    			if(field.getName().contains("data")){
+		    				texto.append(field.getName() + ": " + formataDataLongStringToDateShortString(fieldValue));
+		    			}else{
+		    				texto.append(field.getName() + ": " + fieldValue.toString());
+		    			}
+		    		}
+		    	}
+			}
+		    
+		    return texto.toString();
 	}
 }

@@ -2,24 +2,18 @@ package br.com.retropatio.model;
 
 import java.util.Date;
 
-import javax.persistence.OneToOne;
-
 public class Consulta {
 
 	private String dataInicial;
 	private String dataFinal;
 	private int tipoPesquisa;
 	
-	@OneToOne
 	private Motorista motorista;
 	
-	@OneToOne
 	private Caminhao caminhao;
 	
-	@OneToOne
 	private Container container;
 	
-	@OneToOne
 	private Quadra quadra;
 	
 	private Date dataEntrada;

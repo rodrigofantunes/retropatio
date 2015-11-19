@@ -6,21 +6,23 @@
 	version="2.0">
 
 	<persistence-unit name="default" >
-		<class>br.com.retropatio.model.Pessoa</class>
-		<class>br.com.retropatio.model.Perfil</class>
-		<class>br.com.retropatio.model.Usuario</class>
 		<class>br.com.retropatio.model.Armador</class>
 		<class>br.com.retropatio.model.Caminhao</class>
 		<class>br.com.retropatio.model.Container</class>
 		<class>br.com.retropatio.model.Empresa</class>
 		<class>br.com.retropatio.model.Entrada</class>
+		<class>br.com.retropatio.architecture.Failure</class>
+		<class>br.com.retropatio.model.Logs</class>
 		<class>br.com.retropatio.model.MarcaCaminhao</class>
 		<class>br.com.retropatio.model.ModeloCaminhao</class>
 		<class>br.com.retropatio.model.ModeloContainer</class>
 		<class>br.com.retropatio.model.Motorista</class>
+		<class>br.com.retropatio.model.Perfil</class>
+		<class>br.com.retropatio.model.Pessoa</class>
 		<class>br.com.retropatio.model.Quadra</class>
 		<class>br.com.retropatio.model.Saida</class>
 		<class>br.com.retropatio.model.TamanhoContainer</class>
+		<class>br.com.retropatio.model.Usuario</class>
 		
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />

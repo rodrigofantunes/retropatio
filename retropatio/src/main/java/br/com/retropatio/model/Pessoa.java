@@ -11,41 +11,31 @@ import br.com.retropatio.utilities.Utilities;
 @Entity
 public class Pessoa  {
 
-	@Id @GeneratedValue
-	private Long id;
-	
+	@Id @GeneratedValue private Long id;
 	@NotNull @Size(min=5, max=150) private String nome;
-	
 	private Long cpf;
-	
 	private String cnh;
 	
 	public Long getId() {
 		return id;
 	}
-
 	public void setId(Long id) {
 		this.id = id;
 	}
-
 	
 	public String getCnh() {
 		return cnh;
 	}
-
 	public void setCnh(String cnh) {
 		this.cnh = cnh;
 	}
-
 	
 	public Long getIdPessoa() {
 		return id;
 	}
-
 	public void setIdPessoa(Long id) {
 		this.id = id;
 	}
-
 	public String getNome() {
 		return nome;
 	}

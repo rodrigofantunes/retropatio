@@ -15,7 +15,6 @@ public class UsuarioDao extends Persistences{
 	private static final long serialVersionUID = 1L;
 	private final EntityManager em;
 	List<Usuario> listaUsuarios = new ArrayList<Usuario>();
-	
 	public UsuarioDao() {
 		this(null);
 	}
@@ -40,7 +39,6 @@ public class UsuarioDao extends Persistences{
 							   .parametro(user.getLogin())
 							   .parametro(user.getSenha())
 							   .logar(em);
-			
 			return usuario;
 		} catch (NoResultException e) {
 			return null;

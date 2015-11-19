@@ -48,7 +48,7 @@ public class LoginController extends LoginBusiness {
 	}
 	
 	@Path("/autenticar")
-	public void autenticar(@NotNull @Valid Usuario usuario) throws NoSuchAlgorithmException, ParseException{
+	public void autenticar(@NotNull @Valid Usuario usuario) throws NoSuchAlgorithmException, ParseException, IllegalArgumentException, IllegalAccessException{
 		validation.onErrorRedirectTo(this).login(usuario);
 		if(efetuaAutenticacao(usuario)){
 			result.redirectTo(HomeController.class).home();
