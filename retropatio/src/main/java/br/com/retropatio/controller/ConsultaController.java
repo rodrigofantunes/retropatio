@@ -8,7 +8,7 @@ import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Result;
 import br.com.retropatio.architecture.ValidationSession;
-import br.com.retropatio.model.Consulta;
+import br.com.retropatio.entity.Consulta;
 
 @Controller
 public class ConsultaController extends ValidationSession {

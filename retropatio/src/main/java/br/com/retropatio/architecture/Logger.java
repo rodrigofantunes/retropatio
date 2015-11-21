@@ -6,7 +6,7 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
 import br.com.retropatio.dao.LoggerDao;
-import br.com.retropatio.model.Usuario;
+import br.com.retropatio.entity.Usuario;
 
 public class Logger extends Persistences {
 

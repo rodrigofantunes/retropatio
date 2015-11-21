@@ -6,8 +6,8 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-import br.com.retropatio.model.Pessoa;
-import br.com.retropatio.model.Usuario;
+import br.com.retropatio.entity.Pessoa;
+import br.com.retropatio.entity.Usuario;
 import br.com.retropatio.utilities.Utilities;
 
 @SuppressWarnings("rawtypes")

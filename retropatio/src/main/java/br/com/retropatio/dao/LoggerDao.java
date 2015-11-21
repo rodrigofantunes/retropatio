@@ -9,8 +9,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 
 import br.com.retropatio.architecture.Querys;
-import br.com.retropatio.model.Logs;
-import br.com.retropatio.model.Usuario;
+import br.com.retropatio.entity.Logs;
+import br.com.retropatio.entity.Usuario;
 
 public class LoggerDao extends Querys{
 
@@ -26,10 +26,9 @@ public class LoggerDao extends Querys{
 		this.em = entityManager;
 	}
 
-	public void gravarLog(Logs logs, EntityManager em){
+	public void gravarLog(Logs logs){
 		try {
 			em.persist(logs);
-			em.getTransaction().commit();
 		} catch (NoResultException e) {
 			System.out.println(e.getMessage());
 		}
@@ -54,7 +53,7 @@ public class LoggerDao extends Querys{
 		log.setModulo(log.getModulo().replace("$Proxy$_$$_WeldSubclass", ""));
 		try {
 			if(!tipo.equals(TENTATIVA_LOGIN)){
-				gravarLog(log, em);
+				gravarLog(log);
 			}else{
 				failure.gravarFalha(log);
 			}
@@ -71,7 +70,7 @@ public class LoggerDao extends Querys{
 		log.setIdModulo(userLogin.getId().toString());
 		log.setInformacoes(userLogin.getPessoa().getNome() + " - " + userLogin.getPerfil().getNome());
 		try {
-			gravarLog(log, em);
+			gravarLog(log);
 			log = null;
 		} catch (SecurityException e) {
 			e.printStackTrace();
@@ -85,7 +84,7 @@ public class LoggerDao extends Querys{
 			id = getValueField(classe);
 			preparaLog(tipo, modulo, id);
 			log.setInformacoes(getInformacoes(classe));
-			gravarLog(log, em);
+			gravarLog(log);
 			log = null;
 		} catch (Exception e) {
 			e.printStackTrace();

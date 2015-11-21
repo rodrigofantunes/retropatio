@@ -40,4 +40,5 @@ public interface UtilStatic {
 	public static final String TENTATIVA_LOGIN 	= "Tentativa de Login";
 	public static final String LOGOFF 			= "LogOff";
 	public static final String FALHA 			= "Falha";
+	public static final String FALHA_CRITICA	= "Falha Crítica";
 }

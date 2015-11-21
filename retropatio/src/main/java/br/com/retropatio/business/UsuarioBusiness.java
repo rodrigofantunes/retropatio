@@ -7,7 +7,7 @@ import javax.inject.Inject;
 
 import br.com.retropatio.architecture.ValidationSession;
 import br.com.retropatio.dao.UsuarioDao;
-import br.com.retropatio.model.Usuario;
+import br.com.retropatio.entity.Usuario;
 
 
 public class UsuarioBusiness extends ValidationSession{

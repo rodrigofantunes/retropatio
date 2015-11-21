@@ -8,7 +8,7 @@ import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Result;
 import br.com.retropatio.business.SaidaBusiness;
-import br.com.retropatio.model.Saida;
+import br.com.retropatio.entity.Saida;
 
 @Controller
 public class SaidaController extends SaidaBusiness {

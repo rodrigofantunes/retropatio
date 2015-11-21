@@ -3,7 +3,7 @@ package br.com.retropatio.business;
 import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 
-import br.com.retropatio.model.Usuario;
+import br.com.retropatio.entity.Usuario;
 
 public class LoginBusiness extends UsuarioBusiness {
 

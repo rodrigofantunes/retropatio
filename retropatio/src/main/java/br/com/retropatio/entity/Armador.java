@@ -1,4 +1,4 @@
-package br.com.retropatio.model;
+package br.com.retropatio.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,19 +8,19 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
-public class ModeloCaminhao {
+public class Armador {
 
 	@Id @GeneratedValue
 	private Long id;
 
-	@NotNull @Size(max=60) @Column(nullable = false) private String nomeModelo;
+	@NotNull @Size(max=60) @Column(nullable = false) private String nomeArmador;
 
-	public String getNomeModelo() {
-		return nomeModelo;
+	public String getNomeArmador() {
+		return nomeArmador;
 	}
 
-	public void setNomeModelo(String nomeModelo) {
-		this.nomeModelo = nomeModelo;
+	public void setNomeArmador(String nomeArmador) {
+		this.nomeArmador = nomeArmador;
 	}
 	
 }

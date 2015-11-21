@@ -8,7 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 
 import br.com.retropatio.architecture.Persistences;
-import br.com.retropatio.model.Usuario;
+import br.com.retropatio.entity.Usuario;
 
 public class UsuarioDao extends Persistences{
 

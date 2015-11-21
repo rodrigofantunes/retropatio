@@ -8,7 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 
 import br.com.retropatio.architecture.Logger;
-import br.com.retropatio.model.Saida;
+import br.com.retropatio.entity.Saida;
 import br.com.retropatio.session.UsuarioLogado;
 
 public class SaidaDao extends Logger{

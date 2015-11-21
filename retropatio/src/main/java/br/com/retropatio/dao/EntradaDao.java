@@ -8,7 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 
 import br.com.retropatio.architecture.Logger;
-import br.com.retropatio.model.Entrada;
+import br.com.retropatio.entity.Entrada;
 import br.com.retropatio.session.UsuarioLogado;
 
 public class EntradaDao extends Logger{

@@ -1,4 +1,4 @@
-package br.com.retropatio.model;
+package br.com.retropatio.entity;
 
 import java.util.Date;
 
@@ -14,6 +14,7 @@ import br.com.retropatio.utilities.Utilities;
 public class Motorista {
 
 	@Id @GeneratedValue private Long id;
+	@OneToOne private Empresa empresa;
 	@OneToOne private Pessoa pessoa;
 	private Date dataCadastro;
 	private Date dataAcesso;
@@ -41,5 +42,11 @@ public class Motorista {
 	}
 	public void setDataAcesso(Date dataAcesso) {
 		this.dataAcesso = dataAcesso;
+	}
+	public Empresa getEmpresa() {
+		return empresa;
+	}
+	public void setEmpresa(Empresa empresa) {
+		this.empresa = empresa;
 	}
 }

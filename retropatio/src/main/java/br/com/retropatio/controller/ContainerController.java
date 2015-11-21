@@ -8,7 +8,7 @@ import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Result;
 import br.com.retropatio.business.ContainerBusiness;
-import br.com.retropatio.model.Container;
+import br.com.retropatio.entity.Container;
 
 @Controller
 public class ContainerController extends ContainerBusiness {

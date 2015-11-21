@@ -4,16 +4,16 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
 
 import br.com.retropatio.architecture.Logger;
-import br.com.retropatio.model.Caminhao;
+import br.com.retropatio.entity.Caminhao;
 import br.com.retropatio.session.UsuarioLogado;
 
 public class CaminhaoDao extends Logger{
 	private static final long serialVersionUID = 1L;
 
 	@Inject private UsuarioLogado usuarioLogado;
+	@Inject private FailureDao failureDao;
 	
 	private final EntityManager em;
 	public CaminhaoDao() {
@@ -24,12 +24,14 @@ public class CaminhaoDao extends Logger{
 		this.em = entityManager;
 	}
 
-	public void inserirCaminhao(Caminhao caminhao) throws IllegalArgumentException, NoSuchFieldException, SecurityException{
+	
+	public void inserirCaminhao(Caminhao caminhao) throws Exception{
 		try {
-			em.persist(caminhao);
-			gravaLogAcao(CADASTRAR_CAMINHAO,caminhao, em);
-		} catch (NoResultException e) {
-			
+			persistCaminhao(caminhao,em);
+			gravaLogAcao(CADASTRAR_MOTORISTA,caminhao,em);
+		}
+		catch (Exception e){
+			failureDao.gravarFalhaException(this,e);
 		}
 	}
 	
@@ -37,24 +39,21 @@ public class CaminhaoDao extends Logger{
 		return em.find(Caminhao.class, id);
 	}
 	
-	public void alterarCaminhao(Caminhao caminhao) throws IllegalArgumentException, NoSuchFieldException, SecurityException {
-		try {
-			em.merge(caminhao);
-			gravaLogAcao(ALTERAR_CAMINHAO,caminhao, em);
-		} catch (NoResultException e) {
-			
-		}
+	public void alterarCaminhao(Caminhao caminhao) throws Exception {
+		try { em.merge(caminhao);} 
+		catch (Exception e){}
+		gravaLogAcao(ALTERAR_MOTORISTA,caminhao, em);
 	}
 	
-	public void deletarCaminhao(Caminhao caminhao) throws IllegalArgumentException, NoSuchFieldException, SecurityException {
+	public void deletarCaminhao(Caminhao caminhao) throws Exception {
 		try {
 			em.remove(em.merge(caminhao));
-			gravaLogAcao(DELETAR_CAMINHAO,caminhao, em);
-		} catch (NoResultException e) {
-			
+			gravaLogAcao(DELETAR_MOTORISTA,caminhao, em);
+		}
+		catch (Exception e) {
+			failureDao.gravarFalhaException(this,e);
 		}
 	}
-	
 	@SuppressWarnings("unchecked")
 	public List<Caminhao> listarUltimosCaminhoes(){
 		return montaQry("from " + Caminhao.class.getSimpleName())

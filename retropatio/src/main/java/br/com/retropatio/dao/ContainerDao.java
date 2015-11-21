@@ -7,7 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 
 import br.com.retropatio.architecture.Logger;
-import br.com.retropatio.model.Container;
+import br.com.retropatio.entity.Container;
 import br.com.retropatio.session.UsuarioLogado;
 
 public class ContainerDao extends Logger{

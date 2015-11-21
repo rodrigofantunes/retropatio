@@ -1,4 +1,4 @@
-package br.com.retropatio.model;
+package br.com.retropatio.entity;
 
 import java.util.Date;
 
@@ -10,7 +10,7 @@ import javax.persistence.OneToOne;
 import br.com.retropatio.utilities.Utilities;
 
 @Entity
-public class Saida {
+public class Entrada {
 
 	@Id @GeneratedValue
 	private Long id;
@@ -30,7 +30,7 @@ public class Saida {
 	@OneToOne
 	private Empresa empresa;
 	
-	private Date dataSaida;
+	private Date dataEntrada;
 
 	public Long getId() {
 		return id;
@@ -72,14 +72,6 @@ public class Saida {
 		this.quadra = quadra;
 	}
 
-	public String getDataSaida() {
-		return Utilities.converteDataToString(dataSaida);
-	}
-
-	public void setDataSaida(Date dataSaida) {
-		this.dataSaida = dataSaida;
-	}
-
 	public Empresa getEmpresa() {
 		return empresa;
 	}
@@ -87,6 +79,13 @@ public class Saida {
 	public void setEmpresa(Empresa empresa) {
 		this.empresa = empresa;
 	}
-	
+
+	public String getDataEntrada() {
+		return Utilities.converteDataToString(dataEntrada);
+	}
+
+	public void setDataEntrada(Date dataEntrada) {
+		this.dataEntrada = dataEntrada;
+	}
 	
 }

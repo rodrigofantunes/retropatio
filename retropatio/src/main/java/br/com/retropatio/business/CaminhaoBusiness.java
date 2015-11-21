@@ -7,7 +7,7 @@ import javax.inject.Inject;
 
 import br.com.retropatio.architecture.ValidationSession;
 import br.com.retropatio.dao.CaminhaoDao;
-import br.com.retropatio.model.Caminhao;
+import br.com.retropatio.entity.Caminhao;
 
 
 public class CaminhaoBusiness extends ValidationSession{
@@ -19,15 +19,15 @@ public class CaminhaoBusiness extends ValidationSession{
 		return caminhaoDao.listarUltimosCaminhoes();
 	}
 
-	protected void cadastrarCaminhao(Caminhao caminhao) throws ParseException, IllegalArgumentException, NoSuchFieldException, SecurityException{
+	protected void cadastrarCaminhao(Caminhao caminhao) throws Exception{
 			caminhaoDao.inserirCaminhao(caminhao);
 	}
 	
-	protected void alterarCaminhao(Caminhao caminhao) throws ParseException, IllegalArgumentException, NoSuchFieldException, SecurityException{
+	protected void alterarCaminhao(Caminhao caminhao) throws Exception{
 			caminhaoDao.alterarCaminhao(caminhao);
 	}
 	
-	protected void deletarCaminhao(Long id) throws ParseException, IllegalArgumentException, NoSuchFieldException, SecurityException{
+	protected void deletarCaminhao(Long id) throws Exception{
 			caminhaoDao.deletarCaminhao(caminhaoDao.buscarCaminhaoPorId(id));
 	}
 	

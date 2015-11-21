@@ -1,4 +1,4 @@
-package br.com.retropatio.model;
+package br.com.retropatio.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

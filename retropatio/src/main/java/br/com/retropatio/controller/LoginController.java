@@ -13,7 +13,7 @@ import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.validator.SimpleMessage;
 import br.com.caelum.vraptor.validator.Validator;
 import br.com.retropatio.business.LoginBusiness;
-import br.com.retropatio.model.Usuario;
+import br.com.retropatio.entity.Usuario;
 
 @Controller
 public class LoginController extends LoginBusiness {

@@ -5,9 +5,9 @@ import java.io.Serializable;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
-import br.com.retropatio.model.Empresa;
-import br.com.retropatio.model.Perfil;
-import br.com.retropatio.model.Usuario;
+import br.com.retropatio.entity.Empresa;
+import br.com.retropatio.entity.Perfil;
+import br.com.retropatio.entity.Usuario;
 
 @SessionScoped
 @Named("sessaoLogada")

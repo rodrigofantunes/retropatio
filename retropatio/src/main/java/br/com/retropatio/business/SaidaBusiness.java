@@ -7,7 +7,7 @@ import javax.inject.Inject;
 
 import br.com.retropatio.architecture.ValidationSession;
 import br.com.retropatio.dao.SaidaDao;
-import br.com.retropatio.model.Saida;
+import br.com.retropatio.entity.Saida;
 
 
 public class SaidaBusiness extends ValidationSession{

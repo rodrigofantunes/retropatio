@@ -6,7 +6,7 @@ import javax.inject.Inject;
 
 import br.com.retropatio.architecture.ValidationSession;
 import br.com.retropatio.dao.MotoristaDao;
-import br.com.retropatio.model.Motorista;
+import br.com.retropatio.entity.Motorista;
 
 
 public class MotoristaBusiness extends ValidationSession{

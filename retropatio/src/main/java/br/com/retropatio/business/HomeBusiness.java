@@ -9,8 +9,8 @@ import br.com.caelum.vraptor.Result;
 import br.com.retropatio.controller.LoginController;
 import br.com.retropatio.dao.EntradaDao;
 import br.com.retropatio.dao.SaidaDao;
-import br.com.retropatio.model.Entrada;
-import br.com.retropatio.model.Saida;
+import br.com.retropatio.entity.Entrada;
+import br.com.retropatio.entity.Saida;
 
 
 

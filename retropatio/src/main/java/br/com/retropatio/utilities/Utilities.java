@@ -17,8 +17,8 @@ import java.util.Properties;
 
 import javax.inject.Inject;
 
-import br.com.retropatio.model.Empresa;
-import br.com.retropatio.model.Usuario;
+import br.com.retropatio.entity.Empresa;
+import br.com.retropatio.entity.Usuario;
 import br.com.retropatio.session.UsuarioLogado;
 
 public class Utilities implements Serializable, UtilStatic{

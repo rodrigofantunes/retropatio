@@ -10,7 +10,7 @@ import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.validator.SimpleMessage;
 import br.com.caelum.vraptor.validator.Validator;
 import br.com.retropatio.business.MotoristaBusiness;
-import br.com.retropatio.model.Motorista;
+import br.com.retropatio.entity.Motorista;
 
 @Controller
 public class MotoristaController extends MotoristaBusiness {
@@ -30,7 +30,7 @@ public class MotoristaController extends MotoristaBusiness {
 	}
 
 	@Path("/motorista")
-	public void index() { }
+	public void motoristas() throws ParseException { validaSessao(result);}
 	
 	@Path("/motorista/cadastro")
 	public void cadastro(Motorista motorista) throws ParseException, Exception{ 
@@ -44,10 +44,8 @@ public class MotoristaController extends MotoristaBusiness {
 		if(validaSessao(result)){
 			try{
 				cadastrarMotorista(motorista);
-				result.forwardTo(this).cadastro(null);
-				validation.add(new SimpleMessage("mensagem", "Motorista cadastrado com sucesso!"));
+				result.include("mensagem", "Motorista cadastrado com sucesso!").forwardTo(this).motoristas();
 			}catch(Exception ex){
-				System.out.println(ex.getMessage() + " - " + ex.getCause());
 				validation.add(new SimpleMessage("mensagem", ex.getMessage() + " - " + ex.getCause())).onErrorRedirectTo(MotoristaController.class).cadastro(null);
 			}
 		}
@@ -67,6 +65,6 @@ public class MotoristaController extends MotoristaBusiness {
 	@Path("/motorista/deletar/{motorista.id}")
 	public void deletar(Long id) throws ParseException, Exception{
 		deletarMotorista(id);
-		result.redirectTo(this).index();
+		result.redirectTo(this).motoristas();
 	}
 }

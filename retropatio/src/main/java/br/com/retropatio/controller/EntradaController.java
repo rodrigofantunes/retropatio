@@ -8,7 +8,7 @@ import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Result;
 import br.com.retropatio.business.EntradaBusiness;
-import br.com.retropatio.model.Entrada;
+import br.com.retropatio.entity.Entrada;
 
 @Controller
 public class EntradaController extends EntradaBusiness {

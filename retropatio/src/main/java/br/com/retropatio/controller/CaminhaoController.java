@@ -8,7 +8,7 @@ import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Result;
 import br.com.retropatio.business.CaminhaoBusiness;
-import br.com.retropatio.model.Caminhao;
+import br.com.retropatio.entity.Caminhao;
 
 @Controller
 public class CaminhaoController extends CaminhaoBusiness {
@@ -25,9 +25,9 @@ public class CaminhaoController extends CaminhaoBusiness {
 		this.result = result;
 	}
 
-	@Path("/caminhao")
-	public void index() {
-		result.include(listaUltimosCaminhoes());
+	@Path("/caminhoes")
+	public void caminhoes() {
+		result.include("listaCaminhoes",listaUltimosCaminhoes());
 	}
 	
 	@Path("/caminhao/cadastro")
@@ -36,10 +36,10 @@ public class CaminhaoController extends CaminhaoBusiness {
 	}
 	
 	@Path("/caminhao/cadastrar")
-	public void cadastrar(Caminhao caminhao) throws ParseException, IllegalArgumentException, NoSuchFieldException, SecurityException{
+	public void cadastrar(Caminhao caminhao) throws Exception{
 		if(validaSessao(result)){
 			cadastrarCaminhao(caminhao);
-			result.redirectTo(this).index();
+			result.redirectTo(this).caminhoes();
 		}
 	}
 
@@ -49,14 +49,14 @@ public class CaminhaoController extends CaminhaoBusiness {
 	}
 	
 	@Path("/caminhao/alterar")
-	public void alterar(Caminhao caminhao) throws ParseException, IllegalArgumentException, NoSuchFieldException, SecurityException{
+	public void alterar(Caminhao caminhao) throws Exception{
 		alterarCaminhao(caminhao);
 		result.redirectTo(this).verCaminhao(caminhao.getId());
 	}
 	
 	@Path("/caminhao/deletar/{caminhao.id}")
-	public void deletar(Long id) throws ParseException, IllegalArgumentException, NoSuchFieldException, SecurityException{
+	public void deletar(Long id) throws Exception{
 		deletarCaminhao(id);
-		result.redirectTo(this).index();
+		result.redirectTo(this).caminhoes();
 	}
 }
